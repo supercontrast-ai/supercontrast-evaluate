@@ -96,6 +96,7 @@ EVALUATOR_COMPUTE_RETURN_DOCSTRING = r"""
         A `Dict`. The keys represent metric keys calculated for the `metric` spefied in function arguments. For the
         `"simple"` strategy, the value is the metric score. For the `"bootstrap"` strategy, the value is a `Dict`
         containing the score, the confidence interval and the standard error calculated for each metric key.
+        Additionally, it includes the raw predictions under the 'predictions' key.
 """
 
 
@@ -253,9 +254,9 @@ class Evaluator(ABC):
 
         # Compute predictions
         predictions, perf_results = self.call_pipeline(pipe, pipe_inputs)
-        predictions = self.predictions_processor(predictions, label_mapping)
+        processed_predictions = self.predictions_processor(predictions, label_mapping)
 
-        metric_inputs.update(predictions)
+        metric_inputs.update(processed_predictions)
 
         # Compute metrics from references and predictions
         metric_results = self.compute_metric(
@@ -275,6 +276,7 @@ class Evaluator(ABC):
 
         result.update(metric_results)
         result.update(perf_results)
+        result['predictions'] = predictions  # Add raw predictions to the result
 
         return result
 

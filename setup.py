@@ -1,5 +1,5 @@
 # Lint as: python3
-""" HuggingFace/Evaluate is an open library for evaluation.
+""" SuperContrast/Evaluate is a fork of HuggingFace/Evaluate, an open library for evaluation.
 
 Note:
 
@@ -125,15 +125,15 @@ EXTRAS_REQUIRE = {
 }
 
 setup(
-    name="evaluate",
+    name="supercontrast-evaluate",
     version="0.4.4.dev0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
-    description="HuggingFace community-driven open-source library of evaluation",
+    description="SuperContrast fork of HuggingFace community-driven open-source library of evaluation",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    author="HuggingFace Inc.",
-    author_email="leandro@huggingface.co",
-    url="https://github.com/huggingface/evaluate",
-    download_url="https://github.com/huggingface/evaluate/tags",
+    author="supercontrast",
+    author_email="carter@supercontrast.com",
+    url="https://github.com/supercontrast-ai/supercontrast-evaluate",
+    download_url="https://github.com/supercontrast-ai/supercontrast-evaluate/tags",
     license="Apache 2.0",
     package_dir={"": "src"},
     packages=find_packages("src"),
