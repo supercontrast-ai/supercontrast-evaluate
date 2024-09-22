@@ -235,6 +235,7 @@ class Evaluator(ABC):
         input_column: str = "text",
         label_column: str = "label",
         label_mapping: Optional[Dict[str, Number]] = None,
+        n_rows: int = -1,
     ) -> Dict[str, float]:
 
         result = {}
@@ -243,7 +244,7 @@ class Evaluator(ABC):
 
         # Prepare inputs
         data = self.load_data(data=data, subset=subset, split=split)
-        metric_inputs, pipe_inputs = self.prepare_data(data=data, input_column=input_column, label_column=label_column)
+        metric_inputs, pipe_inputs = self.prepare_data(data=data, input_column=input_column, label_column=label_column, n_rows=n_rows)
         pipe = self.prepare_pipeline(
             model_or_pipeline=model_or_pipeline,
             tokenizer=tokenizer,
@@ -389,7 +390,7 @@ class Evaluator(ABC):
                 "Please specify a valid `data` object - either a `str` with a name or a `Dataset` object."
             )
 
-    def prepare_data(self, data: Dataset, input_column: str, label_column: str, *args, **kwargs):
+    def prepare_data(self, data: Dataset, input_column: str, label_column: str, n_rows: int = -1, *args, **kwargs):
         """
         Prepare data.
 
@@ -402,6 +403,8 @@ class Evaluator(ABC):
                 The name of the column containing the second text feature if there is one. Otherwise, set to `None`.
             label_column (`str`, defaults to `"label"`):
                 The name of the column containing the labels in the dataset specified by `data`.
+            n_rows (`int`, defaults to `-1`):
+                The number of rows to use for the evaluation. If `-1`, all rows are used.
         Returns:
             `dict`:  metric inputs.
             `list`:  pipeline inputs.
@@ -419,7 +422,7 @@ class Evaluator(ABC):
 
         self.check_required_columns(data, {"input_column": input_column, "label_column": label_column})
 
-        return {"references": data[label_column]}, DatasetColumn(data, input_column)
+        return {"references": data[label_column]}, DatasetColumn(data, input_column, n_rows)
 
     def prepare_pipeline(
         self,

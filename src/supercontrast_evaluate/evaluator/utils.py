@@ -4,18 +4,25 @@ from datasets import Dataset, get_dataset_split_names
 class DatasetColumn(list):
     """Helper class to avoid loading a dataset column into memory when accessing it."""
 
-    def __init__(self, dataset: Dataset, key: str):
+    def __init__(self, dataset: Dataset, key: str, n_rows: int = -1):
         self.dataset = dataset
         self.key = key
+        self.n_rows = n_rows
 
     def __len__(self):
-        return len(self.dataset)
+        return min(len(self.dataset), self.n_rows) if self.n_rows != -1 else len(self.dataset)
 
     def __getitem__(self, i):
+        if self.n_rows != -1 and i >= self.n_rows:
+            raise IndexError("Index out of range")
+
         return self.dataset[i][self.key]
 
     def __iter__(self):
-        return (self.dataset[i][self.key] for i in range(len(self)))
+        for i in range(len(self)):
+            if self.n_rows != -1 and i >= self.n_rows:
+                break
+            yield self.dataset[i][self.key]
 
 
 def choose_split(data, subset=None):
