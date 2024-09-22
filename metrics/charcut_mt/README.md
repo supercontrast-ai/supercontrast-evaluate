@@ -29,7 +29,7 @@ CharCut was developed for machine translation evaluation.
 ## How to Use
 
 ```python
-import evaluate
+import supercontrast_evaluate
 charcut = evaluate.load("charcut")
 preds = ["this week the saudis denied information published in the new york times",
                 "this is in fact an estimate"]

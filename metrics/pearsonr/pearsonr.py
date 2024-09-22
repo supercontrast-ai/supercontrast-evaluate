@@ -16,7 +16,7 @@
 import datasets
 from scipy.stats import pearsonr
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -39,13 +39,13 @@ Returns:
 Examples:
 
     Example 1-A simple example using only predictions and references.
-        >>> pearsonr_metric = evaluate.load("pearsonr")
+        >>> pearsonr_metric = supercontrast_evaluate.load("pearsonr")
         >>> results = pearsonr_metric.compute(predictions=[10, 9, 2.5, 6, 4], references=[1, 2, 3, 4, 5])
         >>> print(round(results['pearsonr'], 2))
         -0.74
 
     Example 2-The same as Example 1, but that also returns the `p-value`.
-        >>> pearsonr_metric = evaluate.load("pearsonr")
+        >>> pearsonr_metric = supercontrast_evaluate.load("pearsonr")
         >>> results = pearsonr_metric.compute(predictions=[10, 9, 2.5, 6, 4], references=[1, 2, 3, 4, 5], return_pvalue=True)
         >>> print(sorted(list(results.keys())))
         ['p-value', 'pearsonr']
@@ -83,10 +83,10 @@ doi = {10.1038/s41592-019-0686-2},
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Pearsonr(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Pearsonr(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

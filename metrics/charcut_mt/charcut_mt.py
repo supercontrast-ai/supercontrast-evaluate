@@ -18,7 +18,7 @@ import datasets
 from charcut import calculate_charcut
 from datasets import Sequence, Value
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -52,7 +52,7 @@ Args:
 Returns:
     charcut_mt: the CharCut score
 Examples:
-    >>> charcut_mt = evaluate.load("charcut_mt")
+    >>> charcut_mt = supercontrast_evaluate.load("charcut_mt")
     >>> preds = ["this week the saudis denied information published in the new york times",
     ...          "this is in fact an estimate"]
     >>> refs = ["saudi arabia denied this week information published in the american new york times",
@@ -62,12 +62,12 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Charcut(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Charcut(supercontrast_evaluate.Metric):
     """Character-based MT evaluation."""
 
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             # This is the description that will appear on the modules page.
             module_type="metric",
             description=_DESCRIPTION,

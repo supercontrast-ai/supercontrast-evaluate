@@ -6,7 +6,7 @@ import pytest
 import requests
 import yaml
 
-from evaluate.hub import push_to_hub
+from supercontrast_evaluate.hub import push_to_hub
 from tests.test_metric import DummyMetric
 
 

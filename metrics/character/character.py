@@ -21,7 +21,7 @@ import datasets
 from cer import calculate_cer
 from datasets import Sequence, Value
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -70,7 +70,7 @@ Returns:
     cer_score: an aggregated score across all the items, based on 'aggregate'
     cer_scores: (optionally, if 'return_all_scores' evaluates to True) a list of all scores, one per ref/hyp pair
 Examples:
-    >>> character_mt = evaluate.load("character")
+    >>> character_mt = supercontrast_evaluate.load("character")
     >>> preds = ["this week the saudis denied information published in the new york times"]
     >>> refs = ["saudi arabia denied this week information published in the american new york times"]
     >>> character_mt.compute(references=refs, predictions=preds)
@@ -89,12 +89,12 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Character(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Character(supercontrast_evaluate.Metric):
     """CharacTer is a character-level metric inspired by the commonly applied translation edit rate (TER)."""
 
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             module_type="metric",
             description=_DESCRIPTION,
             citation=_CITATION,

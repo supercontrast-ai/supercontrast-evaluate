@@ -20,7 +20,7 @@ import bert_score
 import datasets
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 @contextmanager
@@ -90,17 +90,17 @@ Examples:
 
     >>> predictions = ["hello there", "general kenobi"]
     >>> references = ["hello there", "general kenobi"]
-    >>> bertscore = evaluate.load("bertscore")
+    >>> bertscore = supercontrast_evaluate.load("bertscore")
     >>> results = bertscore.compute(predictions=predictions, references=references, lang="en")
     >>> print([round(v, 2) for v in results["f1"]])
     [1.0, 1.0]
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class BERTScore(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class BERTScore(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://github.com/Tiiiger/bert_score",

@@ -631,7 +631,7 @@ def evaluation_module_factory(
                     for current_type in ["metric", "comparison", "measurement"]:
                         try:
                             return HubEvaluationModuleFactory(
-                                f"evaluate-{current_type}/{path}",
+                                f"supercontrast-evaluate-{current_type}/{path}",
                                 revision=revision,
                                 download_config=download_config,
                                 download_mode=download_mode,
@@ -643,7 +643,7 @@ def evaluation_module_factory(
                 # if module_type provided load specific module_type
                 else:
                     return HubEvaluationModuleFactory(
-                        f"evaluate-{module_type}/{path}",
+                        f"supercontrast-evaluate-{module_type}/{path}",
                         revision=revision,
                         download_config=download_config,
                         download_mode=download_mode,
@@ -664,7 +664,7 @@ def evaluation_module_factory(
                 for current_type in ["metric", "comparison", "measurement"]:
                     try:
                         return CachedEvaluationModuleFactory(
-                            f"evaluate-{current_type}--{path}", dynamic_modules_path=dynamic_modules_path
+                            f"supercontrast-evaluate-{current_type}--{path}", dynamic_modules_path=dynamic_modules_path
                         ).get_module()
                     except Exception as e2:  # noqa: if it's not in the cache, then it doesn't exist.
                         pass
@@ -740,7 +740,7 @@ def load(
     Example:
 
         ```py
-        >>> from evaluate import load
+        >>> from supercontrast_evaluate import load
         >>> accuracy = load("accuracy")
         ```
     """

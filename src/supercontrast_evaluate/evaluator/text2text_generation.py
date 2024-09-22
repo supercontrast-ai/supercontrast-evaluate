@@ -38,7 +38,7 @@ TASK_DOCUMENTATION_KWARGS = r"""
 TEXT2TEXT_TASK_DOCSTRING_EXAMPLE = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("text2text-generation")
     >>> data = load_dataset("cnn_dailymail", "3.0.0", split="validation[:40]")
@@ -55,7 +55,7 @@ TEXT2TEXT_TASK_DOCSTRING_EXAMPLE = r"""
 SUMMARIZATION_TASK_DOCSTRING_EXAMPLE = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("summarization")
     >>> data = load_dataset("cnn_dailymail", "3.0.0", split="validation[:40]")
@@ -72,7 +72,7 @@ SUMMARIZATION_TASK_DOCSTRING_EXAMPLE = r"""
 TRANSLATION_TASK_DOCSTRING_EXAMPLE = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("translation")
     >>> data = load_dataset("wmt19", "fr-de", split="validation[:40]")
@@ -126,6 +126,7 @@ class Text2TextGenerationEvaluator(Evaluator):
         input_column: str = "text",
         label_column: str = "label",
         generation_kwargs: dict = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         if generation_kwargs is not None:
             self.PIPELINE_KWARGS.update(generation_kwargs)
@@ -144,6 +145,7 @@ class Text2TextGenerationEvaluator(Evaluator):
             random_state=random_state,
             input_column=input_column,
             label_column=label_column,
+            n_rows=n_rows,
         )
 
         return result
@@ -187,6 +189,7 @@ class SummarizationEvaluator(Text2TextGenerationEvaluator):
         input_column: str = "text",
         label_column: str = "label",
         generation_kwargs: dict = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         result = super().compute(
             model_or_pipeline=model_or_pipeline,
@@ -203,6 +206,7 @@ class SummarizationEvaluator(Text2TextGenerationEvaluator):
             input_column=input_column,
             label_column=label_column,
             generation_kwargs=generation_kwargs,
+            n_rows=n_rows,
         )
 
         return result
@@ -246,6 +250,7 @@ class TranslationEvaluator(Text2TextGenerationEvaluator):
         input_column: str = "text",
         label_column: str = "label",
         generation_kwargs: dict = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         result = super().compute(
             model_or_pipeline=model_or_pipeline,
@@ -262,6 +267,7 @@ class TranslationEvaluator(Text2TextGenerationEvaluator):
             input_column=input_column,
             label_column=label_column,
             generation_kwargs=generation_kwargs,
+            n_rows=n_rows,
         )
 
         return result

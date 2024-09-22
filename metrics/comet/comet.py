@@ -19,7 +19,7 @@ pip install unbabel-comet
 Usage:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 comet_metric = load('metrics/comet/comet.py')
 #comet_metric = load('comet')
 #comet_metric = load('comet', 'Unbabel/wmt20-comet-da')
@@ -39,7 +39,7 @@ import datasets
 import torch
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 logger = evaluate.logging.get_logger(__name__)
@@ -113,7 +113,7 @@ Returns:
 
 Examples:
 
-    >>> comet_metric = evaluate.load('comet')
+    >>> comet_metric = supercontrast_evaluate.load('comet')
     >>> # comet_metric = load('comet', 'wmt20-comet-da')  # you can also choose which model to use
     >>> source = ["Dem Feuer konnte Einhalt geboten werden", "Schulen und Kindergärten wurden eröffnet."]
     >>> hypothesis = ["The fire could be stopped", "Schools and kindergartens were open"]
@@ -124,11 +124,11 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class COMET(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class COMET(supercontrast_evaluate.Metric):
     def _info(self):
 
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://unbabel.github.io/COMET/html/index.html",

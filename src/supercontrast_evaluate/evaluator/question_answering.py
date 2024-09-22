@@ -42,7 +42,7 @@ logger = get_logger(__name__)
 TASK_DOCUMENTATION = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("question-answering")
     >>> data = load_dataset("squad", split="validation[:2]")
@@ -61,7 +61,7 @@ TASK_DOCUMENTATION = r"""
     </Tip>
 
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("question-answering")
     >>> data = load_dataset("squad_v2", split="validation[:2]")
@@ -94,7 +94,7 @@ class QuestionAnsweringEvaluator(Evaluator):
         super().__init__(task, default_metric_name=default_metric_name)
 
     def prepare_data(
-        self, data: Dataset, question_column: str, context_column: str, id_column: str, label_column: str
+        self, data: Dataset, question_column: str, context_column: str, id_column: str, label_column: str, n_rows: int = -1
     ):
         """Prepare data."""
         if data is None:
@@ -117,8 +117,8 @@ class QuestionAnsweringEvaluator(Evaluator):
         ]
 
         return metric_inputs, {
-            "question": DatasetColumn(data, question_column),
-            "context": DatasetColumn(data, context_column),
+            "question": DatasetColumn(data, question_column, n_rows=n_rows),
+            "context": DatasetColumn(data, context_column, n_rows=n_rows),
         }
 
     def is_squad_v2_format(self, data: Dataset, label_column: str = "answers"):
@@ -166,6 +166,7 @@ class QuestionAnsweringEvaluator(Evaluator):
         id_column: str = "id",
         label_column: str = "answers",
         squad_v2_format: Optional[bool] = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         """
         question_column (`str`, defaults to `"question"`):
@@ -193,6 +194,7 @@ class QuestionAnsweringEvaluator(Evaluator):
             context_column=context_column,
             id_column=id_column,
             label_column=label_column,
+            n_rows=n_rows,
         )
 
         if squad_v2_format is None:

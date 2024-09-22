@@ -63,7 +63,7 @@ class EvaluationSuite:
     either locally or uploaded as a Space on the Hugging Face Hub.
     Usage:
     ```python
-    from evaluate import EvaluationSuite
+    from supercontrast_evaluate import EvaluationSuite
     suite = EvaluationSuite.load("evaluate/evaluation-suite-ci")
     results = suite.run("lvwerra/distilbert-imdb")
     ```

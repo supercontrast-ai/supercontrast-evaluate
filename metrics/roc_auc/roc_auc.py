@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import roc_auc_score
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -56,7 +56,7 @@ Returns:
     roc_auc (`float` or array-like of shape (n_classes,)): Returns array if in multilabel use case and `average='None'`. Otherwise, returns `float`.
 Examples:
     Example 1:
-        >>> roc_auc_score = evaluate.load("roc_auc")
+        >>> roc_auc_score = supercontrast_evaluate.load("roc_auc")
         >>> refs = [1, 0, 1, 1, 0, 0]
         >>> pred_scores = [0.5, 0.2, 0.99, 0.3, 0.1, 0.7]
         >>> results = roc_auc_score.compute(references=refs, prediction_scores=pred_scores)
@@ -64,7 +64,7 @@ Examples:
         0.78
 
     Example 2:
-        >>> roc_auc_score = evaluate.load("roc_auc", "multiclass")
+        >>> roc_auc_score = supercontrast_evaluate.load("roc_auc", "multiclass")
         >>> refs = [1, 0, 1, 2, 2, 0]
         >>> pred_scores = [[0.3, 0.5, 0.2],
         ...                 [0.7, 0.2, 0.1],
@@ -77,7 +77,7 @@ Examples:
         0.85
 
     Example 3:
-        >>> roc_auc_score = evaluate.load("roc_auc", "multilabel")
+        >>> roc_auc_score = supercontrast_evaluate.load("roc_auc", "multilabel")
         >>> refs = [[1, 1, 0],
         ...         [1, 1, 0],
         ...         [0, 1, 0],
@@ -142,10 +142,10 @@ year={2011}
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class ROCAUC(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class ROCAUC(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

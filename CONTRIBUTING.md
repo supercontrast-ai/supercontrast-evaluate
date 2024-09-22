@@ -50,7 +50,7 @@ feedback.
 
 ### Do you want to implement a new metric?
 
-All evaluation modules, be it metrics, comparisons, or measurements live on the 🤗 Hub in a [Space](https://huggingface.co/docs/hub/spaces) (see for example [Accuracy](https://huggingface.co/spaces/evaluate-metric/accuracy)). Evaluation modules can be either **community** or **canonical**. 
+All evaluation modules, be it metrics, comparisons, or measurements live on the 🤗 Hub in a [Space](https://huggingface.co/docs/hub/spaces) (see for example [Accuracy](https://huggingface.co/spaces/supercontrast_evaluate.Metric/accuracy)). Evaluation modules can be either **community** or **canonical**. 
 
 * **Canonical** metrics are well-established metrics which already broadly adopted. 
 * **Community** metrics are new or custom metrics. It is simple to add a new community metric to use with `evaluate`. Please see our guide to adding a new evaluation metric [here](https://huggingface.co/docs/evaluate/creating_and_sharing)! 

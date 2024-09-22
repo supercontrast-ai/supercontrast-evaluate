@@ -34,7 +34,7 @@ NIST was developed for machine translation evaluation.
 ## How to Use
 
 ```python
-import evaluate
+import supercontrast_evaluate
 nist_mt = evaluate.load("nist_mt")
 hypothesis1 = "It is a guide to action which ensures that the military always obeys the commands of the party"
 reference1 = "It is a guide to action that ensures that the military will forever heed Party commands"

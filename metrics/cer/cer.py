@@ -21,7 +21,7 @@ import jiwer.transforms as tr
 from datasets.config import PY_VERSION
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 if PY_VERSION < version.parse("3.8"):
@@ -108,17 +108,17 @@ Examples:
 
     >>> predictions = ["this is the prediction", "there is an other sample"]
     >>> references = ["this is the reference", "there is another one"]
-    >>> cer = evaluate.load("cer")
+    >>> cer = supercontrast_evaluate.load("cer")
     >>> cer_score = cer.compute(predictions=predictions, references=references)
     >>> print(cer_score)
     0.34146341463414637
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class CER(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class CER(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import confusion_matrix
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -37,7 +37,7 @@ Returns:
 Examples:
 
     Example 1-A simple example
-        >>> confusion_matrix_metric = evaluate.load("confusion_matrix")
+        >>> confusion_matrix_metric = supercontrast_evaluate.load("confusion_matrix")
         >>> results = confusion_matrix_metric.compute(references=[0, 1, 2, 0, 1, 2], predictions=[0, 1, 1, 2, 1, 0])
         >>> print(results)  # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
         {'confusion_matrix': array([[1, 0, 1], [0, 2, 0], [1, 1, 0]][...])}
@@ -59,10 +59,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class ConfusionMatrix(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class ConfusionMatrix(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

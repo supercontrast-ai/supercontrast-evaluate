@@ -1,6 +1,6 @@
-import evaluate
-from evaluate.utils import launch_gradio_widget
+import supercontrast_evaluate
+from supercontrast_evaluate.utils import launch_gradio_widget
 
 
-module = evaluate.load("{{ cookiecutter.namespace }}/{{ cookiecutter.module_slug }}")
+module = supercontrast_evaluate.load("{{ cookiecutter.namespace }}/{{ cookiecutter.module_slug }}")
 launch_gradio_widget(module)

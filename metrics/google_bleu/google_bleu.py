@@ -18,8 +18,8 @@ from typing import Dict, List
 import datasets
 from nltk.translate import gleu_score
 
-import evaluate
-from evaluate import MetricInfo
+import supercontrast_evaluate
+from supercontrast_evaluate import MetricInfo
 
 from .tokenizer_13a import Tokenizer13a
 
@@ -81,7 +81,7 @@ Examples:
         'he read the book because he was interested in world history']
         >>> references = [['It is the guiding principle which guarantees the rubber duck forces never being under the command of the cat'], \
         ['he was interested in world history because he read the book']]
-        >>> google_bleu = evaluate.load("google_bleu")
+        >>> google_bleu = supercontrast_evaluate.load("google_bleu")
         >>> results = google_bleu.compute(predictions=predictions, references=references)
         >>> print(round(results["google_bleu"], 2))
         0.44
@@ -93,7 +93,7 @@ Examples:
         'It is a guide to action that ensures that the rubber duck will never heed the cat commands', \
         'It is the practical guide for the rubber duck army never to heed the directions of the cat'], \
         ['he was interested in world history because he read the book']]
-        >>> google_bleu = evaluate.load("google_bleu")
+        >>> google_bleu = supercontrast_evaluate.load("google_bleu")
         >>> results = google_bleu.compute(predictions=predictions, references=references)
         >>> print(round(results["google_bleu"], 2))
         0.61
@@ -105,7 +105,7 @@ Examples:
         'It is a guide to action that ensures that the rubber duck will never heed the cat commands', \
         'It is the practical guide for the rubber duck army never to heed the directions of the cat'], \
         ['he was interested in world history because he read the book']]
-        >>> google_bleu = evaluate.load("google_bleu")
+        >>> google_bleu = supercontrast_evaluate.load("google_bleu")
         >>> results = google_bleu.compute(predictions=predictions, references=references, min_len=2)
         >>> print(round(results["google_bleu"], 2))
         0.53
@@ -117,17 +117,17 @@ Examples:
         'It is a guide to action that ensures that the rubber duck will never heed the cat commands', \
         'It is the practical guide for the rubber duck army never to heed the directions of the cat'], \
         ['he was interested in world history because he read the book']]
-        >>> google_bleu = evaluate.load("google_bleu")
+        >>> google_bleu = supercontrast_evaluate.load("google_bleu")
         >>> results = google_bleu.compute(predictions=predictions,references=references, min_len=2, max_len=6)
         >>> print(round(results["google_bleu"], 2))
         0.4
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class GoogleBleu(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class GoogleBleu(supercontrast_evaluate.Metric):
     def _info(self) -> MetricInfo:
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

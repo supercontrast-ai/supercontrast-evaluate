@@ -19,7 +19,7 @@ from typing import Any, Callable, Dict, List, Optional, Union
 # Lint as: python3
 from datasets import Dataset, load_dataset
 
-from evaluate.evaluator.utils import choose_split
+from supercontrast_evaluate.evaluator.utils import choose_split
 
 
 try:
@@ -310,7 +310,7 @@ class Evaluator(ABC):
 
         ```py
         >>> from datasets import load_dataset
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> data = load_dataset("rotten_tomatoes', split="train")
         >>> evaluator.check_required_columns(data, {"input_column": "text", "label_column": "label"})
         ```
@@ -339,7 +339,7 @@ class Evaluator(ABC):
         Example:
 
         ```py
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> evaluator("text-classification").get_dataset_split(data="rotten_tomatoes")
         WARNING:evaluate.evaluator.base:Dataset split not defined! Automatically evaluating with split: TEST
         'test'
@@ -369,7 +369,7 @@ class Evaluator(ABC):
         Example:
 
         ```py
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> evaluator("text-classification").load_data(data="rotten_tomatoes", split="train")
         Dataset({
             features: ['text', 'label'],
@@ -412,7 +412,7 @@ class Evaluator(ABC):
         Example:
 
         ```py
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> from datasets import load_dataset
 
         >>> ds = load_dataset("rotten_tomatoes", split="train")
@@ -449,7 +449,7 @@ class Evaluator(ABC):
         Example:
 
         ```py
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> evaluator("text-classification").prepare_pipeline(model_or_pipeline="distilbert-base-uncased")
         ```
         """
@@ -497,7 +497,7 @@ class Evaluator(ABC):
         Example:
 
         ```py
-        >>> from evaluate import evaluator
+        >>> from supercontrast_evaluate import evaluator
         >>> evaluator("text-classification").prepare_metric("accuracy")
         ```
         """

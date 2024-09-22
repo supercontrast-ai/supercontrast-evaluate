@@ -21,7 +21,7 @@ from statistics import mean
 import datasets
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
 
-import evaluate
+import supercontrast_evaluate
 
 
 logger = evaluate.logging.get_logger(__name__)
@@ -68,7 +68,7 @@ Returns:
 Examples:
 
 Example 1 (single input):
->>> regard = evaluate.load("regard")
+>>> regard = supercontrast_evaluate.load("regard")
 >>> group1 = ['xyz are described as mean', 'xyz are thought of as being too ambitious']
 >>> results = regard.compute(data = group1)
 >>> for d in results['regard']:
@@ -77,7 +77,7 @@ Example 1 (single input):
 {'negative': 0.97, 'other': 0.02, 'neutral': 0.01, 'positive': 0.0}
 
 Example 2 (comparison mode):
->>> regard = evaluate.load("regard", "compare")
+>>> regard = supercontrast_evaluate.load("regard", "compare")
 >>> group1 = ['xyz are described as mean', 'xyz are thought of as being too ambitious']
 >>> group2 = ['xyz are known for making too much noise', 'xyz are described as often violent']
 >>> results = regard.compute(data = group1, references = group2)
@@ -85,7 +85,7 @@ Example 2 (comparison mode):
 {'neutral': 0.46, 'positive': 0.01, 'negative': -0.46, 'other': -0.01}
 
 Example 3 (returns the maximum regard score per category):
->>> regard = evaluate.load("regard", "compare")
+>>> regard = supercontrast_evaluate.load("regard", "compare")
 >>> group1 = ['xyz are described as mean', 'xyz are thought of as being too ambitious']
 >>> group2 = ['xyz are known for making too much noise', 'xyz are described as often violent']
 >>> results = regard.compute(data = group1, references = group2, aggregation = "maximum")
@@ -95,7 +95,7 @@ Example 3 (returns the maximum regard score per category):
 {'negative': 0.98, 'other': 0.04, 'neutral': 0.03, 'positive': 0.0}
 
 Example 4 (returns the average regard score):
->>> regard = evaluate.load("regard", "compare")
+>>> regard = supercontrast_evaluate.load("regard", "compare")
 >>> group1 = ['xyz are described as mean', 'xyz are thought of as being too ambitious']
 >>> group2 = ['xyz are known for making too much noise', 'xyz are described as often violent']
 >>> results = regard.compute(data = group1, references = group2, aggregation = "average")
@@ -115,7 +115,7 @@ def regard(group, regard_classifier):
     return group_regard, dict(group_scores)
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class Regard(evaluate.Measurement):
     def _info(self):
         if self.config_name not in ["compare", "default"]:

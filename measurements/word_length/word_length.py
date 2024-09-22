@@ -18,7 +18,7 @@ import datasets
 from nltk import word_tokenize
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 if evaluate.config.PY_VERSION < version.parse("3.8"):
@@ -45,7 +45,7 @@ Returns:
 
 Examples:
     >>> data = ["hello world"]
-    >>> wordlength = evaluate.load("word_length", module_type="measurement")
+    >>> wordlength = supercontrast_evaluate.load("word_length", module_type="measurement")
     >>> results = wordlength.compute(data=data)
     >>> print(results)
     {'average_word_length': 2}
@@ -61,7 +61,7 @@ year={2020}
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class WordLength(evaluate.Measurement):
     """This measurement returns the average number of words in the input string(s)."""
 

@@ -9,7 +9,7 @@ Evaluate can be easily intergrated into your Keras and Tensorflow workflow. We'l
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
-import evaluate
+import supercontrast_evaluate
 
 # We pull example code from Keras.io's guide on classifying with MNIST
 # Located here: https://keras.io/examples/vision/mnist_convnet/
@@ -95,7 +95,7 @@ model_history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs
 callbacks = [MetricsCallback(x_data = x_train, y_data = y_train, metric_name = "accuracy")])
 ```
 
-## Using an Evaluate Metric for... Evaluation!
+## Using an supercontrast_evaluate.Metric for... Evaluation!
 
 We can also use the same metric after model training! Here, we show how to check accuracy of the model after training on the test set:
 

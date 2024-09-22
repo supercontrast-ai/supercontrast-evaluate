@@ -15,7 +15,7 @@
 
 import datasets
 
-import evaluate
+import supercontrast_evaluate
 
 from .compute_score import compute_score
 
@@ -58,17 +58,17 @@ Examples:
 
     >>> predictions = [{'prediction_text': '1976', 'id': '56e10a3be3433e1400422b22'}]
     >>> references = [{'answers': {'answer_start': [97], 'text': ['1976']}, 'id': '56e10a3be3433e1400422b22'}]
-    >>> squad_metric = evaluate.load("squad")
+    >>> squad_metric = supercontrast_evaluate.load("squad")
     >>> results = squad_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'exact_match': 100.0, 'f1': 100.0}
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Squad(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Squad(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

@@ -36,7 +36,7 @@ Any language generation task.
 The metric takes a list of text as input, as well as the name of the model used to compute the metric:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 perplexity = load("perplexity", module_type="metric")
 results = perplexity.compute(predictions=predictions, model_id='gpt2')
 ```

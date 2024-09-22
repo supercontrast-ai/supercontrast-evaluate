@@ -32,7 +32,7 @@ from transformers import (
     pipeline,
 )
 
-from evaluate import (
+from supercontrast_evaluate import (
     AudioClassificationEvaluator,
     AutomaticSpeechRecognitionEvaluator,
     Evaluator,

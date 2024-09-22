@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import matplotlib.pyplot as plt
 
-from evaluate.visualization import radar_plot
+from supercontrast_evaluate.visualization import radar_plot
 
 
 class TestViz(TestCase):

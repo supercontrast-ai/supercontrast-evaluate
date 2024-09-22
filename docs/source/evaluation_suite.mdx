@@ -17,8 +17,8 @@ The mandatory attributes for a new `SubTask` are `task_type` and `data`.
 4. [`args_for_task`] should be a dictionary with kwargs to be passed to the Evaluator.
 
 ```python
-import evaluate
-from evaluate.evaluation_suite import SubTask
+import supercontrast_evaluate
+from supercontrast_evaluate.evaluation_suite import SubTask
 
 class Suite(evaluate.EvaluationSuite):
 
@@ -63,7 +63,7 @@ class Suite(evaluate.EvaluationSuite):
 An `EvaluationSuite` can be loaded by name from the Hugging Face Hub, or locally by providing a path, and run with the `run(model_or_pipeline)` method. The evaluation results are returned along with their task names and information about the time it took to obtain predictions through the pipeline. These can be easily displayed with a `pandas.DataFrame`:
 
 ```
->>> from evaluate import EvaluationSuite
+>>> from supercontrast_evaluate import EvaluationSuite
 >>> suite = EvaluationSuite.load('mathemakitten/glue-evaluation-suite')
 >>> results = suite.run("gpt2")
 ```

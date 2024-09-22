@@ -18,7 +18,7 @@ import numpy as np
 from rl_reliability_metrics.evaluation import eval_metrics
 from rl_reliability_metrics.metrics import metrics_offline, metrics_online
 
-import evaluate
+import supercontrast_evaluate
 
 
 logger = evaluate.logging.get_logger(__name__)
@@ -71,7 +71,7 @@ Returns:
     dictionary: a set of reliability metrics
 Examples:
     >>> import numpy as np
-    >>> rl_reliability = evaluate.load("rl_reliability", "online")
+    >>> rl_reliability = supercontrast_evaluate.load("rl_reliability", "online")
     >>> results = rl_reliability.compute(
     ...     timesteps=[np.linspace(0, 2000000, 1000)],
     ...     rewards=[np.linspace(0, 100, 1000)]
@@ -81,15 +81,15 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class RLReliability(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class RLReliability(supercontrast_evaluate.Metric):
     """Computes the RL Reliability Metrics."""
 
     def _info(self):
         if self.config_name not in ["online", "offline"]:
             raise KeyError("""You should supply a configuration name selected in '["online", "offline"]'""")
 
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             module_type="metric",
             description=_DESCRIPTION,
             citation=_CITATION,

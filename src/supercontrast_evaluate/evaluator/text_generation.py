@@ -50,7 +50,7 @@ class TextGenerationEvaluator(Evaluator):
         super().__init__(task=task, default_metric_name=default_metric_name)
         self.predictions_prefix = predictions_prefix
 
-    def prepare_data(self, data: Dataset, input_column: str, *args, **kwargs) -> Tuple[Dict, DatasetColumn]:
+    def prepare_data(self, data: Dataset, input_column: str, n_rows: int = -1, *args, **kwargs) -> Tuple[Dict, DatasetColumn]:
         """
         Prepare data.
 
@@ -66,4 +66,4 @@ class TextGenerationEvaluator(Evaluator):
 
         self.check_required_columns(data, {"input_column": input_column})
 
-        return {}, DatasetColumn(data, input_column)
+        return {}, DatasetColumn(data, input_column, n_rows=n_rows)

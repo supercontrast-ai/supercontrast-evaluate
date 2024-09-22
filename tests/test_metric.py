@@ -8,7 +8,7 @@ from unittest import TestCase, mock
 import pytest
 from datasets.features import Features, Sequence, Value
 
-from evaluate.module import EvaluationModule, EvaluationModuleInfo, combine
+from supercontrast_evaluate.module import EvaluationModule, EvaluationModuleInfo, combine
 
 from .utils import require_tf, require_torch
 

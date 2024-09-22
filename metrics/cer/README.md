@@ -59,7 +59,7 @@ where
 The metric takes two inputs: references (a list of references for each speech input) and predictions (a list of transcriptions to score).
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 cer = load("cer")
 cer_score = cer.compute(predictions=predictions, references=references)
 ```
@@ -87,7 +87,7 @@ Multilingual datasets such as [Common Voice](https://huggingface.co/datasets/com
 Perfect match between prediction and reference:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 cer = load("cer")
 predictions = ["hello world", "good night moon"]
 references = ["hello world", "good night moon"]
@@ -99,7 +99,7 @@ print(cer_score)
 Partial match between prediction and reference:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 cer = load("cer")
 predictions = ["this is the prediction", "there is an other sample"]
 references = ["this is the reference", "there is another one"]
@@ -111,7 +111,7 @@ print(cer_score)
 No match between prediction and reference:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 cer = load("cer")
 predictions = ["hello"]
 references = ["gracias"]
@@ -123,7 +123,7 @@ print(cer_score)
 CER above 1 due to insertion errors:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 cer = load("cer")
 predictions = ["hello world"]
 references = ["hello"]

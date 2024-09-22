@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import mean_squared_error
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -61,7 +61,7 @@ Returns:
     mse : mean squared error.
 Examples:
 
-    >>> mse_metric = evaluate.load("mse")
+    >>> mse_metric = supercontrast_evaluate.load("mse")
     >>> predictions = [2.5, 0.0, 2, 8]
     >>> references = [3, -0.5, 2, 7]
     >>> results = mse_metric.compute(predictions=predictions, references=references)
@@ -73,7 +73,7 @@ Examples:
 
     If you're using multi-dimensional lists, then set the config as follows :
 
-    >>> mse_metric = evaluate.load("mse", "multilist")
+    >>> mse_metric = supercontrast_evaluate.load("mse", "multilist")
     >>> predictions = [[0.5, 1], [-1, 1], [7, -6]]
     >>> references = [[0, 2], [-1, 2], [8, -5]]
     >>> results = mse_metric.compute(predictions=predictions, references=references)
@@ -85,10 +85,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Mse(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Mse(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

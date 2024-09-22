@@ -13,7 +13,7 @@
 # limitations under the License.
 """TODO: Add a description here."""
 
-import evaluate
+import supercontrast_evaluate
 import datasets
 
 
@@ -47,7 +47,7 @@ Examples:
     Examples should be written in doctest format, and should illustrate how
     to use the function.
 
-    >>> my_new_module = evaluate.load("my_new_module")
+    >>> my_new_module = supercontrast_evaluate.load("my_new_module")
     >>> results = my_new_module.compute(references=[0, 1], predictions=[0, 1])
     >>> print(results)
     {'accuracy': 1.0}
@@ -57,7 +57,7 @@ Examples:
 BAD_WORDS_URL = "http://url/to/external/resource/bad_words.txt"
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class {{ cookiecutter.module_class_name }}(evaluate.{{ cookiecutter.module_type | capitalize}}):
     """TODO: Short description of my evaluation module."""
 

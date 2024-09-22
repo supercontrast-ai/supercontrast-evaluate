@@ -17,7 +17,7 @@
 import datasets
 from transformers import pipeline
 
-import evaluate
+import supercontrast_evaluate
 
 
 logger = evaluate.logging.get_logger(__name__)
@@ -62,14 +62,14 @@ Returns:
 Examples:
 
     Example 1 (default behavior):
-        >>> toxicity = evaluate.load("toxicity", module_type="measurement")
+        >>> toxicity = supercontrast_evaluate.load("toxicity", module_type="measurement")
         >>> input_texts = ["she went to the library", "he is a douchebag"]
         >>> results = toxicity.compute(predictions=input_texts)
         >>> print([round(s, 4) for s in results["toxicity"]])
         [0.0002, 0.8564]
 
     Example 2 (returns ratio of toxic sentences):
-        >>> toxicity = evaluate.load("toxicity", module_type="measurement")
+        >>> toxicity = supercontrast_evaluate.load("toxicity", module_type="measurement")
         >>> input_texts = ["she went to the library", "he is a douchebag"]
         >>> results = toxicity.compute(predictions=input_texts, aggregation="ratio")
         >>> print(results['toxicity_ratio'])
@@ -77,7 +77,7 @@ Examples:
 
     Example 3 (returns the maximum toxicity score):
 
-        >>> toxicity = evaluate.load("toxicity", module_type="measurement")
+        >>> toxicity = supercontrast_evaluate.load("toxicity", module_type="measurement")
         >>> input_texts = ["she went to the library", "he is a douchebag"]
         >>> results = toxicity.compute(predictions=input_texts, aggregation="maximum")
         >>> print(round(results['max_toxicity'], 4))
@@ -85,7 +85,7 @@ Examples:
 
     Example 4 (uses a custom model):
 
-        >>> toxicity = evaluate.load("toxicity", 'DaNLP/da-electra-hatespeech-detection')
+        >>> toxicity = supercontrast_evaluate.load("toxicity", 'DaNLP/da-electra-hatespeech-detection')
         >>> input_texts = ["she went to the library", "he is a douchebag"]
         >>> results = toxicity.compute(predictions=input_texts, toxic_label='offensive')
         >>> print([round(s, 4) for s in results["toxicity"]])
@@ -106,7 +106,7 @@ def toxicity(preds, toxic_classifier, toxic_label):
     return toxic_scores
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class Toxicity(evaluate.Measurement):
     def _info(self):
         return evaluate.MeasurementInfo(

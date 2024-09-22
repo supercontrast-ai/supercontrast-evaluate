@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import mean_absolute_percentage_error
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -60,7 +60,7 @@ Returns:
         MAPE output is non-negative floating point. The best value is 0.0.
 Examples:
 
-    >>> mape_metric = evaluate.load("mape")
+    >>> mape_metric = supercontrast_evaluate.load("mape")
     >>> predictions = [2.5, 0.0, 2, 8]
     >>> references = [3, -0.5, 2, 7]
     >>> results = mape_metric.compute(predictions=predictions, references=references)
@@ -69,7 +69,7 @@ Examples:
 
     If you're using multi-dimensional lists, then set the config as follows :
 
-    >>> mape_metric = evaluate.load("mape", "multilist")
+    >>> mape_metric = supercontrast_evaluate.load("mape", "multilist")
     >>> predictions = [[0.5, 1], [-1, 1], [7, -6]]
     >>> references = [[0.1, 2], [-1, 2], [8, -5]]
     >>> results = mape_metric.compute(predictions=predictions, references=references)
@@ -81,10 +81,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Mape(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Mape(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

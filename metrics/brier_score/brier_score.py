@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import brier_score_loss
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -66,7 +66,7 @@ Returns
 Examples:
     Example-1: if y_true in {-1, 1} or {0, 1}, pos_label defaults to 1.
         >>> import numpy as np
-        >>> brier_score = evaluate.load("brier_score")
+        >>> brier_score = supercontrast_evaluate.load("brier_score")
         >>> references = np.array([0, 0, 1, 1])
         >>> predictions = np.array([0.1, 0.9, 0.8, 0.3])
         >>> results = brier_score.compute(references=references, predictions=predictions)
@@ -75,7 +75,7 @@ Examples:
 
     Example-2: if y_true contains string, an error will be raised and pos_label should be explicitly specified.
         >>> import numpy as np
-        >>> brier_score = evaluate.load("brier_score")
+        >>> brier_score = supercontrast_evaluate.load("brier_score")
         >>> references =  np.array(["spam", "ham", "ham", "spam"])
         >>> predictions = np.array([0.1, 0.9, 0.8, 0.3])
         >>> results = brier_score.compute(references=references, predictions=predictions, pos_label="ham")
@@ -84,10 +84,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class BrierScore(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class BrierScore(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

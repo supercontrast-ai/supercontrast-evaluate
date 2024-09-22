@@ -6,11 +6,11 @@
 
 There are different aspects of a typical machine learning pipeline that can be evaluated and for each aspect 🤗 Evaluate provides a tool:
 
-- **Metric**: A metric is used to evaluate a model's performance and usually involves the model's predictions as well as some ground truth labels. You can find all integrated metrics at [evaluate-metric](https://huggingface.co/evaluate-metric).
+- **Metric**: A metric is used to evaluate a model's performance and usually involves the model's predictions as well as some ground truth labels. You can find all integrated metrics at [supercontrast_evaluate.Metric](https://huggingface.co/supercontrast_evaluate.Metric).
 - **Comparison**: A comparison is used to compare two models. This can for example be done by comparing their predictions to ground truth labels and computing their agreement. You can find all integrated comparisons at [evaluate-comparison](https://huggingface.co/evaluate-comparison).
 - **Measurement**: The dataset is as important as the model trained on it. With measurements one can investigate a dataset's properties. You can find all integrated measurements at [evaluate-measurement](https://huggingface.co/evaluate-measurement).
 
-Each of these evaluation modules live on Hugging Face Hub as a Space. They come with an interactive widget and a documentation card documenting its use and limitations. For example [accuracy](https://huggingface.co/spaces/evaluate-metric/accuracy):
+Each of these evaluation modules live on Hugging Face Hub as a Space. They come with an interactive widget and a documentation card documenting its use and limitations. For example [accuracy](https://huggingface.co/spaces/supercontrast_evaluate.Metric/accuracy):
 
 <div class="flex justify-center">
     <img src="https://huggingface.co/datasets/evaluate/media/resolve/main/metric-widget.png" width="400"/>
@@ -23,7 +23,7 @@ Each metric, comparison, and measurement is a separate Python module, but for us
 Any metric, comparison, or measurement is loaded with the `evaluate.load` function:
 
 ```py
->>> import evaluate
+>>> import supercontrast_evaluate
 >>> accuracy = evaluate.load("accuracy")
 ```
 
@@ -170,7 +170,7 @@ This is especially useful when you need to get the predictions from your model i
 
 ### Distributed evaluation
 
-Computing metrics in a distributed environment can be tricky. Metric evaluation is executed in separate Python processes, or nodes, on different subsets of a dataset. Typically, when a metric score is additive (`f(AuB) = f(A) + f(B)`), you can use distributed reduce operations to gather the scores for each subset of the dataset. But when a metric is non-additive (`f(AuB) ≠ f(A) + f(B)`), it's not that simple. For example, you can't take the sum of the [F1](https://huggingface.co/spaces/evaluate-metric/f1) scores of each data subset as your **final metric**.
+Computing metrics in a distributed environment can be tricky. Metric evaluation is executed in separate Python processes, or nodes, on different subsets of a dataset. Typically, when a metric score is additive (`f(AuB) = f(A) + f(B)`), you can use distributed reduce operations to gather the scores for each subset of the dataset. But when a metric is non-additive (`f(AuB) ≠ f(A) + f(B)`), it's not that simple. For example, you can't take the sum of the [F1](https://huggingface.co/spaces/supercontrast_evaluate.Metric/f1) scores of each data subset as your **final metric**.
 
 A common way to overcome this issue is to fallback on single process evaluation. The metrics are evaluated on a single GPU, which becomes inefficient.
 
@@ -253,8 +253,8 @@ To make an evaluation with the `evaluator` let's load a `transformers` pipeline 
 ```python
 from transformers import pipeline
 from datasets import load_dataset
-from evaluate import evaluator
-import evaluate
+from supercontrast_evaluate import evaluator
+import supercontrast_evaluate
 
 pipe = pipeline("text-classification", model="lvwerra/distilbert-imdb", device=0)
 data = load_dataset("imdb", split="test").shuffle().select(range(1000))
@@ -300,8 +300,8 @@ When comparing several models, sometimes it's hard to spot the differences in th
 For instance, if you have a list of results from multiple models (as dictionaries), you can feed them into the `radar_plot()` function:
 
 ```python
-import evaluate
-from evaluate.visualization import radar_plot
+import supercontrast_evaluate
+from supercontrast_evaluate.visualization import radar_plot
 
 >>> data = [
    {"accuracy": 0.99, "precision": 0.8, "f1": 0.95, "latency_in_seconds": 33.6},
@@ -326,8 +326,8 @@ It can be useful to evaluate models on a variety of different tasks to understan
 `EvaluationSuite` scripts can be defined as follows, and supports Python code for data preprocessing.
 
 ```python
-import evaluate
-from evaluate.evaluation_suite import SubTask
+import supercontrast_evaluate
+from supercontrast_evaluate.evaluation_suite import SubTask
 
 class Suite(evaluate.EvaluationSuite):
 
@@ -369,7 +369,7 @@ class Suite(evaluate.EvaluationSuite):
 Evaluation can be run by loading the `EvaluationSuite` and calling the `run()` method with a model or pipeline.
 
 ```
->>> from evaluate import EvaluationSuite
+>>> from supercontrast_evaluate import EvaluationSuite
 >>> suite = EvaluationSuite.load('mathemakitten/sentiment-evaluation-suite')
 >>> results = suite.run("huggingface/prunebert-base-uncased-6-finepruned-w-distil-mnli")
 ```

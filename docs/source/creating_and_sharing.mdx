@@ -16,7 +16,7 @@ huggingface-cli login
 
 ## Create
 
-All evaluation modules, be it metrics, comparisons, or measurements live on the 🤗 Hub in a [Space](https://huggingface.co/docs/hub/spaces) (see for example [Accuracy](https://huggingface.co/spaces/evaluate-metric/accuracy)). In principle, you could setup a new Space and add a new module following the same structure. However, we added a CLI that makes creating a new evaluation module much easier:
+All evaluation modules, be it metrics, comparisons, or measurements live on the 🤗 Hub in a [Space](https://huggingface.co/docs/hub/spaces) (see for example [Accuracy](https://huggingface.co/spaces/supercontrast_evaluate.Metric/accuracy)). In principle, you could setup a new Space and add a new module following the same structure. However, we added a CLI that makes creating a new evaluation module much easier:
 
 ```bash
 evaluate-cli create "My Metric" --module_type "metric"
@@ -90,8 +90,8 @@ If your evaluation modules has additional dependencies (e.g. `sklearn` or `nltk`
 The `app.py` is where the Spaces widget lives. In general it looks like the following and does not require any changes:
 
 ```py
-import evaluate
-from evaluate.utils import launch_gradio_widget
+import supercontrast_evaluate
+from supercontrast_evaluate.utils import launch_gradio_widget
 
 
 module = evaluate.load("lvwerra/element_count")

@@ -18,7 +18,7 @@ from typing import Union
 import datasets
 from sklearn.metrics import classification_report
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -69,7 +69,7 @@ Examples:
 
     >>> predictions = [['INTJ', 'ADP', 'PROPN', 'NOUN', 'PUNCT', 'INTJ', 'ADP', 'PROPN', 'VERB', 'SYM']]
     >>> references = [['INTJ', 'ADP', 'PROPN', 'PROPN', 'PUNCT', 'INTJ', 'ADP', 'PROPN', 'PROPN', 'SYM']]
-    >>> poseval = evaluate.load("poseval")
+    >>> poseval = supercontrast_evaluate.load("poseval")
     >>> results = poseval.compute(predictions=predictions, references=references)
     >>> print(list(results.keys()))
     ['ADP', 'INTJ', 'NOUN', 'PROPN', 'PUNCT', 'SYM', 'VERB', 'accuracy', 'macro avg', 'weighted avg']
@@ -80,10 +80,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Poseval(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Poseval(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://scikit-learn.org",

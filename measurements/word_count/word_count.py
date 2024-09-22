@@ -15,7 +15,7 @@
 import datasets
 from sklearn.feature_extraction.text import CountVectorizer
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -33,7 +33,7 @@ Returns:
 
 Examples:
     >>> data = ["hello world and hello moon"]
-    >>> wordcount= evaluate.load("word_count")
+    >>> wordcount= supercontrast_evaluate.load("word_count")
     >>> results = wordcount.compute(data=data)
     >>> print(results)
     {'total_word_count': 5, 'unique_words': 4}
@@ -41,7 +41,7 @@ Examples:
 _CITATION = ""
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class WordCount(evaluate.Measurement):
     """This measurement returns the total number of words and the number of unique words
     in the input string(s)."""

@@ -6,7 +6,7 @@ from pathlib import Path
 from cookiecutter.main import cookiecutter
 from huggingface_hub import HfApi, Repository, create_repo
 
-from evaluate.utils.logging import get_logger
+from supercontrast_evaluate.utils.logging import get_logger
 
 
 logger = get_logger(__name__)
@@ -39,7 +39,7 @@ You should then see the update widget on the Hugging Face Hub: {repo_url}
 And you can load your module in Python with the following code:
 
 ```
-from evaluate import load
+from supercontrast_evaluate import load
 module = load("{namespace}/{module_slug}")
 ```
 """

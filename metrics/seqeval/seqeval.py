@@ -19,7 +19,7 @@ from typing import List, Optional, Union
 import datasets
 from seqeval.metrics import accuracy_score, classification_report
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -88,7 +88,7 @@ Examples:
 
     >>> predictions = [['O', 'O', 'B-MISC', 'I-MISC', 'I-MISC', 'I-MISC', 'O'], ['B-PER', 'I-PER', 'O']]
     >>> references = [['O', 'O', 'O', 'B-MISC', 'I-MISC', 'I-MISC', 'O'], ['B-PER', 'I-PER', 'O']]
-    >>> seqeval = evaluate.load("seqeval")
+    >>> seqeval = supercontrast_evaluate.load("seqeval")
     >>> results = seqeval.compute(predictions=predictions, references=references)
     >>> print(list(results.keys()))
     ['MISC', 'PER', 'overall_precision', 'overall_recall', 'overall_f1', 'overall_accuracy']
@@ -99,10 +99,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Seqeval(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Seqeval(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://github.com/chakki-works/seqeval",

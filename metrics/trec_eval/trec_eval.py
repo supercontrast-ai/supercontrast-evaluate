@@ -17,7 +17,7 @@ import datasets
 import pandas as pd
 from trectools import TrecEval, TrecQrel, TrecRun
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -46,7 +46,7 @@ Args:
 Returns:
     dict: TREC evaluation scores.
 Examples:
-    >>> trec = evaluate.load("trec_eval")
+    >>> trec = supercontrast_evaluate.load("trec_eval")
     >>> qrel = {
     ...     "query": [0],
     ...     "q0": ["0"],
@@ -67,12 +67,12 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class TRECEval(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class TRECEval(supercontrast_evaluate.Metric):
     """Compute TREC evaluation scores."""
 
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             module_type="metric",
             description=_DESCRIPTION,
             citation=_CITATION,

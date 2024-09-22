@@ -36,7 +36,7 @@ So any of the following works:
 
 ```py
 from datasets import load_dataset
-from evaluate import evaluator
+from supercontrast_evaluate import evaluator
 from transformers import AutoModelForSequenceClassification, pipeline
 
 data = load_dataset("imdb", split="test").shuffle(seed=42).select(range(1000))
@@ -98,7 +98,7 @@ The time performances can give useful indication on model speed for inference bu
 With the [`combine`] function one can bundle several metrics into an object that behaves like a single metric. We can use this to evaluate several metrics at once with the evaluator:
 
 ```python
-import evaluate
+import supercontrast_evaluate
 
 eval_results = task_evaluator.compute(
     model_or_pipeline="lvwerra/distilbert-imdb",
@@ -142,7 +142,7 @@ Here is an example where several models can be compared thanks to the `evaluator
 ```python
 import pandas as pd
 from datasets import load_dataset
-from evaluate import evaluator
+from supercontrast_evaluate import evaluator
 from transformers import pipeline
 
 models = [
@@ -188,8 +188,8 @@ The result is a table that looks like this:
 You can feed in the `results` list above into the `plot_radar()` function to visualize different aspects of their performance and choose the model that is the best fit, depending on the metric(s) that are relevant to your use case:
 
 ```python
-import evaluate
-from evaluate.visualization import radar_plot
+import supercontrast_evaluate
+from supercontrast_evaluate.visualization import radar_plot
 
 >>> plot = radar_plot(data=results, model_names=models, invert_range=["latency_in_seconds"])
 >>> plot.show()
@@ -224,7 +224,7 @@ Every evaluator comes with the options to compute confidence intervals using [bo
 
 ```python
 from datasets import load_dataset
-from evaluate import evaluator
+from supercontrast_evaluate import evaluator
 
 task_evaluator = evaluator("question-answering")
 

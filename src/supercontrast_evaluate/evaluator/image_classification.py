@@ -30,7 +30,7 @@ if TYPE_CHECKING:
 TASK_DOCUMENTATION = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("image-classification")
     >>> data = load_dataset("beans", split="test[:40]")
@@ -86,6 +86,7 @@ class ImageClassificationEvaluator(Evaluator):
         input_column: str = "image",
         label_column: str = "label",
         label_mapping: Optional[Dict[str, Number]] = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
 
         """
@@ -114,6 +115,7 @@ class ImageClassificationEvaluator(Evaluator):
             input_column=input_column,
             label_column=label_column,
             label_mapping=label_mapping,
+            n_rows=n_rows,
         )
 
         return result

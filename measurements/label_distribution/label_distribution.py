@@ -19,7 +19,7 @@ import datasets
 import pandas as pd
 from scipy import stats
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -35,7 +35,7 @@ Returns:
     `label_skew` (`scalar`) : the asymmetry of the label distribution.
 Examples:
     >>> data = [1, 0, 1, 1, 0, 1, 0]
-    >>> distribution = evaluate.load("label_distribution")
+    >>> distribution = supercontrast_evaluate.load("label_distribution")
     >>> results = distribution.compute(data=data)
     >>> print(results)
     {'label_distribution': {'labels': [1, 0], 'fractions': [0.5714285714285714, 0.42857142857142855]}, 'label_skew': -0.2886751345948127}
@@ -68,7 +68,7 @@ _CITATION = """\
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class LabelDistribution(evaluate.Measurement):
     def _info(self):
         return evaluate.MeasurementInfo(

@@ -32,7 +32,7 @@ TASK_DOCUMENTATION = r"""
 
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("token-classification")
     >>> data = load_dataset("conll2003", split="validation[:2]")
@@ -164,8 +164,8 @@ class TokenClassificationEvaluator(Evaluator):
 
         return offsets
 
-    def prepare_data(self, data: Union[str, Dataset], input_column: str, label_column: str, join_by: str):
-        super().prepare_data(data, input_column, label_column)
+    def prepare_data(self, data: Union[str, Dataset], input_column: str, label_column: str, join_by: str, n_rows: int = -1):
+        super().prepare_data(data, input_column, label_column, n_rows=n_rows)
 
         if not isinstance(data.features[input_column], Sequence) or not isinstance(
             data.features[label_column], Sequence

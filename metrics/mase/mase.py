@@ -17,7 +17,7 @@ import datasets
 import numpy as np
 from sklearn.metrics import mean_absolute_error
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -65,7 +65,7 @@ Returns:
         MASE output is non-negative floating point. The best value is 0.0.
 Examples:
 
-    >>> mase_metric = evaluate.load("mase")
+    >>> mase_metric = supercontrast_evaluate.load("mase")
     >>> predictions = [2.5, 0.0, 2, 8, 1.25]
     >>> references = [3, -0.5, 2, 7, 2]
     >>> training = [5, 0.5, 4, 6, 3, 5, 2]
@@ -75,7 +75,7 @@ Examples:
 
     If you're using multi-dimensional lists, then set the config as follows :
 
-    >>> mase_metric = evaluate.load("mase", "multilist")
+    >>> mase_metric = supercontrast_evaluate.load("mase", "multilist")
     >>> predictions = [[0, 2], [-1, 2], [8, -5]]
     >>> references = [[0.5, 1], [-1, 1], [7, -6]]
     >>> training = [[0.5, 1], [-1, 1], [7, -6]]
@@ -91,10 +91,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Mase(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Mase(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

@@ -22,7 +22,7 @@ The TREC Eval metric combines a number of information retrieval metrics such as 
 
 ## How to Use
 ```Python
-from evaluate import load
+from supercontrast_evaluate import load
 trec_eval = load("trec_eval")
 results = trec_eval.compute(predictions=[run], references=[qrel])
 ```

@@ -26,8 +26,8 @@ import numpy as np
 import pytest
 from absl.testing import parameterized
 
-import evaluate
-from evaluate import load
+import supercontrast_evaluate
+from supercontrast_evaluate import load
 
 from .utils import _run_slow_tests, for_all_test_methods, local, slow
 
@@ -102,11 +102,11 @@ class LocalModuleTest(parameterized.TestCase):
     def test_load(self, evaluation_module_name, evaluation_module_type):
         doctest.ELLIPSIS_MARKER = "[...]"
         evaluation_module = importlib.import_module(
-            evaluate.loading.evaluation_module_factory(
+            supercontrast_evaluate.loading.evaluation_module_factory(
                 os.path.join(evaluation_module_type + "s", evaluation_module_name), module_type=evaluation_module_type
             ).module_path
         )
-        evaluation_instance = evaluate.loading.import_main_class(evaluation_module.__name__)
+        evaluation_instance = supercontrast_evaluate.loading.import_main_class(evaluation_module.__name__)
         # check parameters
         parameters = inspect.signature(evaluation_instance._compute).parameters
         self.assertTrue(all([p.kind != p.VAR_KEYWORD for p in parameters.values()]))  # no **kwargs
@@ -124,7 +124,7 @@ class LocalModuleTest(parameterized.TestCase):
     def test_load_real_metric(self, evaluation_module_name, evaluation_module_type):
         doctest.ELLIPSIS_MARKER = "[...]"
         metric_module = importlib.import_module(
-            evaluate.loading.evaluation_module_factory(
+            supercontrast_evaluate.loading.evaluation_module_factory(
                 os.path.join(evaluation_module_type, evaluation_module_name)
             ).module_path
         )
@@ -147,7 +147,7 @@ class LocalModuleTest(parameterized.TestCase):
         def load_local_metric(evaluation_module_name, *args, **kwargs):
             return load(os.path.join(evaluation_module_type + "s", evaluation_module_name), *args, **kwargs)
 
-        with patch("evaluate.load") as mock_load:
+        with patch("supercontrast_evaluate.load") as mock_load:
             mock_load.side_effect = load_local_metric
             yield
 

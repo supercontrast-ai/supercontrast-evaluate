@@ -31,7 +31,7 @@ The exact match score of a set of predictions is the sum of all of the individua
 ## How to Use
 At minimum, this metric takes as input predictions and references:
 ```python
->>> from evaluate import load
+>>> from supercontrast_evaluate import load
 >>> exact_match_metric = load("exact_match")
 >>> results = exact_match_metric.compute(predictions=predictions, references=references)
 ```

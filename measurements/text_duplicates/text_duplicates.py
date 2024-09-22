@@ -17,7 +17,7 @@ from collections import Counter
 
 import datasets
 
-import evaluate
+import supercontrast_evaluate
 
 
 logger = evaluate.logging.get_logger(__name__)
@@ -36,13 +36,13 @@ Returns:
 
 Examples:
     >>> data = ["hello sun","hello moon", "hello sun"]
-    >>> duplicates = evaluate.load("text_duplicates")
+    >>> duplicates = supercontrast_evaluate.load("text_duplicates")
     >>> results = duplicates.compute(data=data)
     >>> print(results)
     {'duplicate_fraction': 0.33333333333333337}
 
     >>> data = ["hello sun","hello moon", "hello sun"]
-    >>> duplicates = evaluate.load("text_duplicates")
+    >>> duplicates = supercontrast_evaluate.load("text_duplicates")
     >>> results =  duplicates.compute(data=data, list_duplicates=True)
     >>> print(results)
     {'duplicate_fraction': 0.33333333333333337, 'duplicates_dict': {'hello sun': 2}}
@@ -57,7 +57,7 @@ def get_hash(example):
     return hashlib.md5(example.strip().encode("utf-8")).hexdigest()
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class TextDuplicates(evaluate.Measurement):
     """This measurement returns the duplicate strings contained in the input(s)."""
 

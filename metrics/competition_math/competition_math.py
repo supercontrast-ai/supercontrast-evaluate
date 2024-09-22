@@ -16,7 +16,7 @@
 import datasets
 import math_equivalence  # From: git+https://github.com/hendrycks/math.git
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -56,7 +56,7 @@ Returns:
         (e.g., converting "1/2" to "\\frac{1}{2}")
 
 Examples:
-    >>> metric = evaluate.load("competition_math")
+    >>> metric = supercontrast_evaluate.load("competition_math")
     >>> results = metric.compute(references=["\\frac{1}{2}"], predictions=["1/2"])
     >>> print(results)
     {'accuracy': 1.0}
@@ -64,11 +64,11 @@ Examples:
 
 
 @datasets.utils.file_utils.add_end_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class CompetitionMathMetric(evaluate.Metric):
+class CompetitionMathMetric(supercontrast_evaluate.Metric):
     """Accuracy metric for the MATH dataset."""
 
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

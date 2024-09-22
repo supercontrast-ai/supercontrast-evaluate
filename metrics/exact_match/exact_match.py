@@ -18,7 +18,7 @@ import string
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -42,14 +42,14 @@ Args:
 Returns:
     exact_match: Dictionary containing exact_match rate. Possible values are between 0.0 and 1.0, inclusive.
 Examples:
-    >>> exact_match = evaluate.load("exact_match")
+    >>> exact_match = supercontrast_evaluate.load("exact_match")
     >>> refs = ["the cat", "theater", "YELLING", "agent007"]
     >>> preds = ["cat?", "theater", "yelling", "agent"]
     >>> results = exact_match.compute(references=refs, predictions=preds)
     >>> print(round(results["exact_match"], 2))
     0.25
 
-    >>> exact_match = evaluate.load("exact_match")
+    >>> exact_match = supercontrast_evaluate.load("exact_match")
     >>> refs = ["the cat", "theater", "YELLING", "agent007"]
     >>> preds = ["cat?", "theater", "yelling", "agent"]
     >>> results = exact_match.compute(references=refs, predictions=preds, regexes_to_ignore=["the ", "yell"], ignore_case=True, ignore_punctuation=True)
@@ -57,21 +57,21 @@ Examples:
     0.5
 
 
-    >>> exact_match = evaluate.load("exact_match")
+    >>> exact_match = supercontrast_evaluate.load("exact_match")
     >>> refs = ["the cat", "theater", "YELLING", "agent007"]
     >>> preds = ["cat?", "theater", "yelling", "agent"]
     >>> results = exact_match.compute(references=refs, predictions=preds, regexes_to_ignore=["the ", "yell", "YELL"], ignore_case=True, ignore_punctuation=True)
     >>> print(round(results["exact_match"], 2))
     0.75
 
-    >>> exact_match = evaluate.load("exact_match")
+    >>> exact_match = supercontrast_evaluate.load("exact_match")
     >>> refs = ["the cat", "theater", "YELLING", "agent007"]
     >>> preds = ["cat?", "theater", "yelling", "agent"]
     >>> results = exact_match.compute(references=refs, predictions=preds, regexes_to_ignore=["the ", "yell", "YELL"], ignore_case=True, ignore_punctuation=True, ignore_numbers=True)
     >>> print(round(results["exact_match"], 2))
     1.0
 
-    >>> exact_match = evaluate.load("exact_match")
+    >>> exact_match = supercontrast_evaluate.load("exact_match")
     >>> refs = ["The cat sat on the mat.", "Theaters are great.", "It's like comparing oranges and apples."]
     >>> preds = ["The cat sat on the mat?", "Theaters are great.", "It's like comparing apples and oranges."]
     >>> results = exact_match.compute(references=refs, predictions=preds)
@@ -83,10 +83,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class ExactMatch(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class ExactMatch(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

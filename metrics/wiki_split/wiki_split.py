@@ -22,7 +22,7 @@ import sacrebleu
 import sacremoses
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """
@@ -70,7 +70,7 @@ Examples:
     >>> sources=["About 95 species are currently accepted ."]
     >>> predictions=["About 95 you now get in ."]
     >>> references=[["About 95 species are currently known ."]]
-    >>> wiki_split = evaluate.load("wiki_split")
+    >>> wiki_split = supercontrast_evaluate.load("wiki_split")
     >>> results = wiki_split.compute(sources=sources, predictions=predictions, references=references)
     >>> print(results)
     {'sari': 21.805555555555557, 'sacrebleu': 14.535768424205482, 'exact': 0.0}
@@ -320,10 +320,10 @@ def compute_sacrebleu(
     return output.score
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class WikiSplit(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class WikiSplit(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import accuracy_score
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -43,19 +43,19 @@ Returns:
 Examples:
 
     Example 1-A simple example
-        >>> accuracy_metric = evaluate.load("accuracy")
+        >>> accuracy_metric = supercontrast_evaluate.load("accuracy")
         >>> results = accuracy_metric.compute(references=[0, 1, 2, 0, 1, 2], predictions=[0, 1, 1, 2, 1, 0])
         >>> print(results)
         {'accuracy': 0.5}
 
     Example 2-The same as Example 1, except with `normalize` set to `False`.
-        >>> accuracy_metric = evaluate.load("accuracy")
+        >>> accuracy_metric = supercontrast_evaluate.load("accuracy")
         >>> results = accuracy_metric.compute(references=[0, 1, 2, 0, 1, 2], predictions=[0, 1, 1, 2, 1, 0], normalize=False)
         >>> print(results)
         {'accuracy': 3.0}
 
     Example 3-The same as Example 1, except with `sample_weight` set.
-        >>> accuracy_metric = evaluate.load("accuracy")
+        >>> accuracy_metric = supercontrast_evaluate.load("accuracy")
         >>> results = accuracy_metric.compute(references=[0, 1, 2, 0, 1, 2], predictions=[0, 1, 1, 2, 1, 0], sample_weight=[0.5, 2, 0.7, 0.5, 9, 0.4])
         >>> print(results)
         {'accuracy': 0.8778625954198473}
@@ -77,10 +77,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Accuracy(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Accuracy(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

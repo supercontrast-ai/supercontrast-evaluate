@@ -16,7 +16,7 @@
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -50,17 +50,17 @@ Returns:
     mahalanobis: The Mahalonobis distance for each datapoint in `X`.
 Examples:
 
-    >>> mahalanobis_metric = evaluate.load("mahalanobis")
+    >>> mahalanobis_metric = supercontrast_evaluate.load("mahalanobis")
     >>> results = mahalanobis_metric.compute(reference_distribution=[[0, 1], [1, 0]], X=[[0, 1]])
     >>> print(results)
     {'mahalanobis': array([0.5])}
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Mahalanobis(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Mahalanobis(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

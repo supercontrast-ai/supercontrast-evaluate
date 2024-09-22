@@ -55,6 +55,7 @@ class DatasetColumnPair(list):
         second_col: str,
         first_key: str,
         second_key: str,
+        n_rows: int = -1,
     ):
         """
         Args:
@@ -63,6 +64,7 @@ class DatasetColumnPair(list):
             second_col (str): second column name to use in the dataset
             first_key (str): key name used for the first column in the returned dictionary
             second_key (str): key name used for the second column in the returned dictionary
+            n_rows (int): number of rows to use in the dataset
         """
         self.dataset = dataset
 
@@ -71,11 +73,15 @@ class DatasetColumnPair(list):
 
         self.first_key = first_key
         self.second_key = second_key
+        self.n_rows = n_rows
 
     def __len__(self):
-        return len(self.dataset)
+        return min(len(self.dataset), self.n_rows) if self.n_rows != -1 else len(self.dataset)
 
     def __getitem__(self, i):
+        if self.n_rows != -1 and i >= self.n_rows:
+            raise IndexError("Index out of range")
+
         return {
             self.first_key: self.dataset[i][self.first_col],
             self.second_key: self.dataset[i][self.second_col] if self.second_col else None,

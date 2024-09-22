@@ -126,7 +126,7 @@ def evaluator(task: str = None) -> Evaluator:
         [`Evaluator`]: An evaluator suitable for the task.
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> # Sentiment analysis evaluator
     >>> evaluator("sentiment-analysis")
     ```"""

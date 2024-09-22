@@ -14,7 +14,7 @@ The metrics in `evaluate` can be easily integrated with the [`~transformers.Trai
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
 import numpy as np
-import evaluate
+import supercontrast_evaluate
 
 # Prepare and tokenize dataset
 dataset = load_dataset("yelp_review_full")
@@ -58,7 +58,7 @@ We can use the [`~transformers.Seq2SeqTrainer`] for sequence-to-sequence tasks s
 ```python
 import nltk
 from datasets import load_dataset
-import evaluate
+import supercontrast_evaluate
 import numpy as np
 from transformers import AutoTokenizer, DataCollatorForSeq2Seq
 from transformers import AutoModelForSeq2SeqLM, Seq2SeqTrainingArguments, Seq2SeqTrainer

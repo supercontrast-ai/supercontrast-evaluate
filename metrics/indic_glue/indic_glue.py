@@ -19,7 +19,7 @@ from scipy.spatial.distance import cdist
 from scipy.stats import pearsonr, spearmanr
 from sklearn.metrics import f1_score
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -49,21 +49,21 @@ Returns: depending on the IndicGLUE subset, one or several of:
     "precision": Precision@10
 Examples:
 
-    >>> indic_glue_metric = evaluate.load('indic_glue', 'wnli')  # 'wnli' or any of ["copa", "sna", "csqa", "wstp", "inltkh", "bbca", "iitp-mr", "iitp-pr", "actsa-sc", "md"]
+    >>> indic_glue_metric = supercontrast_evaluate.load('indic_glue', 'wnli')  # 'wnli' or any of ["copa", "sna", "csqa", "wstp", "inltkh", "bbca", "iitp-mr", "iitp-pr", "actsa-sc", "md"]
     >>> references = [0, 1]
     >>> predictions = [0, 1]
     >>> results = indic_glue_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'accuracy': 1.0}
 
-    >>> indic_glue_metric = evaluate.load('indic_glue', 'wiki-ner')
+    >>> indic_glue_metric = supercontrast_evaluate.load('indic_glue', 'wiki-ner')
     >>> references = [0, 1]
     >>> predictions = [0, 1]
     >>> results = indic_glue_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'accuracy': 1.0, 'f1': 1.0}
 
-    >>> indic_glue_metric = evaluate.load('indic_glue', 'cvit-mkb-clsr')
+    >>> indic_glue_metric = supercontrast_evaluate.load('indic_glue', 'cvit-mkb-clsr')
     >>> references = [[0.5, 0.5, 0.5], [0.1, 0.2, 0.3]]
     >>> predictions = [[0.5, 0.5, 0.5], [0.1, 0.2, 0.3]]
     >>> results = indic_glue_metric.compute(predictions=predictions, references=references)
@@ -102,8 +102,8 @@ def precision_at_10(en_sentvecs, in_sentvecs):
     return float(matches.mean())
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class IndicGlue(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class IndicGlue(supercontrast_evaluate.Metric):
     def _info(self):
         if self.config_name not in [
             "wnli",
@@ -126,7 +126,7 @@ class IndicGlue(evaluate.Metric):
                 '"cvit-mkb-clsr", "iitp-mr", "iitp-pr", "actsa-sc", "md", '
                 '"wiki-ner"]'
             )
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

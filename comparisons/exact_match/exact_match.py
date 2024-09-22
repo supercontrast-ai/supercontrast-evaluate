@@ -16,7 +16,7 @@
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -33,7 +33,7 @@ Returns:
     exact_match (`float`): Dictionary containing exact_match rate. Possible values are between 0.0 and 1.0, inclusive.
 
 Examples:
-    >>> exact_match = evaluate.load("exact_match", module_type="comparison")
+    >>> exact_match = supercontrast_evaluate.load("exact_match", module_type="comparison")
     >>> results = exact_match.compute(predictions1=[1, 1, 1], predictions2=[1, 1, 1])
     >>> print(results)
     {'exact_match': 1.0}
@@ -44,10 +44,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class ExactMatch(evaluate.Comparison):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class ExactMatch(supercontrast_evaluate.Comparison):
     def _info(self):
-        return evaluate.ComparisonInfo(
+        return supercontrast_evaluate.ComparisonInfo(
             module_type="comparison",
             description=_DESCRIPTION,
             citation=_CITATION,

@@ -42,7 +42,7 @@ pip install evaluate
 Run the following command to check if 🤗 Evaluate has been properly installed:
 
 ```bash
-python -c "import evaluate; print(evaluate.load('exact_match').compute(references=['hello'], predictions=['hello']))"
+python -c "import supercontrast_evaluate; print(evaluate.load('exact_match').compute(references=['hello'], predictions=['hello']))"
 ```
 
 This should return:
@@ -64,5 +64,5 @@ pip install -e .
 Again, you can check if 🤗 Evaluate has been properly installed with:
 
 ```bash
-python -c "import evaluate; print(evaluate.load('exact_match').compute(references=['hello'], predictions=['hello']))"
+python -c "import supercontrast_evaluate; print(evaluate.load('exact_match').compute(references=['hello'], predictions=['hello']))"
 ```

@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 TASK_DOCUMENTATION = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("text-classification")
     >>> data = load_dataset("imdb", split="test[:2]")
@@ -62,7 +62,7 @@ class TextClassificationEvaluator(Evaluator):
     def __init__(self, task="text-classification", default_metric_name=None):
         super().__init__(task, default_metric_name=default_metric_name)
 
-    def prepare_data(self, data: Union[str, Dataset], input_column: str, second_input_column: str, label_column: str):
+    def prepare_data(self, data: Union[str, Dataset], input_column: str, second_input_column: str, label_column: str, n_rows: int = -1):
         if data is None:
             raise ValueError(
                 "Please specify a valid `data` object - either a `str` with a name or a `Dataset` object."
@@ -76,7 +76,7 @@ class TextClassificationEvaluator(Evaluator):
         data = load_dataset(data) if isinstance(data, str) else data
 
         return {"references": data[label_column]}, DatasetColumnPair(
-            data, input_column, second_input_column, "text", "text_pair"
+            data, input_column, second_input_column, "text", "text_pair", n_rows=n_rows
         )
 
     def predictions_processor(self, predictions, label_mapping):
@@ -108,6 +108,7 @@ class TextClassificationEvaluator(Evaluator):
         second_input_column: Optional[str] = None,
         label_column: str = "label",
         label_mapping: Optional[Dict[str, Number]] = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         """
         input_column (`str`, *optional*, defaults to `"text"`):
@@ -129,7 +130,7 @@ class TextClassificationEvaluator(Evaluator):
         # Prepare inputs
         data = self.load_data(data=data, subset=subset, split=split)
         metric_inputs, pipe_inputs = self.prepare_data(
-            data=data, input_column=input_column, second_input_column=second_input_column, label_column=label_column
+            data=data, input_column=input_column, n_rows=n_rows, second_input_column=second_input_column, label_column=label_column
         )
         pipe = self.prepare_pipeline(
             model_or_pipeline=model_or_pipeline,

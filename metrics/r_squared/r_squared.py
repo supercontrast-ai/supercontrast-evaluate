@@ -18,7 +18,7 @@
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """
@@ -57,17 +57,17 @@ Returns:
     R^2 value ranging from 0 to 1, with a higher value indicating a better fit.
 
 Examples:
-    >>> r2_metric = evaluate.load("r_squared")
+    >>> r2_metric = supercontrast_evaluate.load("r_squared")
     >>> r_squared = r2_metric.compute(predictions=[1, 2, 3, 4], references=[0.9, 2.1, 3.2, 3.8])
     >>> print(r_squared)
     0.98
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class r_squared(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class r_squared(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

@@ -16,7 +16,7 @@
 import datasets
 from scipy.stats import chi2
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -39,7 +39,7 @@ Returns:
     p (`float`): The p value. Minimum possible value is 0. Maximum possible value is 1.0. A lower p value means a more significant difference.
 
 Examples:
-    >>> mcnemar = evaluate.load("mcnemar")
+    >>> mcnemar = supercontrast_evaluate.load("mcnemar")
     >>> results = mcnemar.compute(references=[1, 0, 1], predictions1=[1, 1, 1], predictions2=[1, 0, 1])
     >>> print(results)
     {'stat': 1.0, 'p': 0.31731050786291115}
@@ -60,10 +60,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class McNemar(evaluate.Comparison):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class McNemar(supercontrast_evaluate.Comparison):
     def _info(self):
-        return evaluate.ComparisonInfo(
+        return supercontrast_evaluate.ComparisonInfo(
             module_type="comparison",
             description=_DESCRIPTION,
             citation=_CITATION,

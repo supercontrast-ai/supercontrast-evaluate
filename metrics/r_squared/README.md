@@ -46,7 +46,7 @@ r_squared = 1 - (SSR/SST)
 The R2 class in the evaluate module can be used to compute the R^2 value for a given set of predictions and references. (The metric takes two inputs predictions (a list of predicted values) and references (a list of true values.))
  
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 >>> r2_metric = evaluate.load("r_squared")
 >>> r_squared = r2_metric.compute(predictions=[1, 2, 3, 4], references=[0.9, 2.1, 3.2, 3.8])
 >>> print(r_squared)  
@@ -55,7 +55,7 @@ from evaluate import load
 
 Alternatively, if you want to see an example where there is a perfect match between the prediction and reference:
 ```python
->>> from evaluate import load
+>>> from supercontrast_evaluate import load
 >>> r2_metric = evaluate.load("r_squared")
 >>> r_squared = r2_metric.compute(predictions=[1, 2, 3, 4], references=[1, 2, 3, 4])
 >>> print(r_squared)

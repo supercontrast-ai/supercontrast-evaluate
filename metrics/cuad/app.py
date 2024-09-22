@@ -1,6 +1,6 @@
-import evaluate
-from evaluate.utils import launch_gradio_widget
+import supercontrast_evaluate
+from supercontrast_evaluate.utils import launch_gradio_widget
 
 
-module = evaluate.load("cuad")
+module = supercontrast_evaluate.load("cuad")
 launch_gradio_widget(module)

@@ -17,7 +17,7 @@ import sacrebleu as scb
 from packaging import version
 from sacrebleu import CHRF
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -95,7 +95,7 @@ Examples:
     Example 1--a simple example of calculating chrF:
         >>> prediction = ["The relationship between cats and dogs is not exactly friendly.", "a good bookshop is just a genteel black hole that knows how to read."]
         >>> reference = [["The relationship between dogs and cats is not exactly friendly."], ["A good bookshop is just a genteel Black Hole that knows how to read."]]
-        >>> chrf = evaluate.load("chrf")
+        >>> chrf = supercontrast_evaluate.load("chrf")
         >>> results = chrf.compute(predictions=prediction, references=reference)
         >>> print(results)
         {'score': 84.64214891738334, 'char_order': 6, 'word_order': 0, 'beta': 2}
@@ -103,7 +103,7 @@ Examples:
     Example 2--the same example, but with the argument word_order=2, to calculate chrF++ instead of chrF:
         >>> prediction = ["The relationship between cats and dogs is not exactly friendly.", "a good bookshop is just a genteel black hole that knows how to read."]
         >>> reference = [["The relationship between dogs and cats is not exactly friendly."], ["A good bookshop is just a genteel Black Hole that knows how to read."]]
-        >>> chrf = evaluate.load("chrf")
+        >>> chrf = supercontrast_evaluate.load("chrf")
         >>> results = chrf.compute(predictions=prediction,
         ...                         references=reference,
         ...                         word_order=2)
@@ -113,7 +113,7 @@ Examples:
     Example 3--the same chrF++ example as above, but with `lowercase=True` to normalize all case:
         >>> prediction = ["The relationship between cats and dogs is not exactly friendly.", "a good bookshop is just a genteel black hole that knows how to read."]
         >>> reference = [["The relationship between dogs and cats is not exactly friendly."], ["A good bookshop is just a genteel Black Hole that knows how to read."]]
-        >>> chrf = evaluate.load("chrf")
+        >>> chrf = supercontrast_evaluate.load("chrf")
         >>> results = chrf.compute(predictions=prediction,
         ...                         references=reference,
         ...                         word_order=2,
@@ -123,15 +123,15 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class ChrF(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class ChrF(supercontrast_evaluate.Metric):
     def _info(self):
         if version.parse(scb.__version__) < version.parse("1.4.12"):
             raise ImportWarning(
                 "To use `sacrebleu`, the module `sacrebleu>=1.4.12` is required, and the current version of `sacrebleu` doesn't match this condition.\n"
                 'You can install it with `pip install "sacrebleu>=1.4.12"`.'
             )
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://github.com/mjpost/sacreBLEU#chrf--chrf",

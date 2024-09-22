@@ -11,7 +11,7 @@ import transformers
 from datasets import load_dataset
 from transformers import AutoFeatureExtractor, AutoModelForImageClassification, Trainer, TrainingArguments, pipeline
 
-from evaluate import evaluator, load
+from supercontrast_evaluate import evaluator, load
 
 from .utils import slow
 

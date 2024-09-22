@@ -19,8 +19,8 @@ import torch
 from torch.nn import CrossEntropyLoss
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-import evaluate
-from evaluate import logging
+import supercontrast_evaluate
+from supercontrast_evaluate import logging
 
 
 _CITATION = """\
@@ -57,7 +57,7 @@ Returns:
         max length for the perplexity computation.
 Examples:
     Example 1:
-        >>> perplexity = evaluate.load("perplexity", module_type="measurement")
+        >>> perplexity = supercontrast_evaluate.load("perplexity", module_type="measurement")
         >>> data = ["lorem ipsum", "Happy Birthday!", "Bienvenue"]
         >>> results = perplexity.compute(model_id='gpt2',
         ...                              add_start_token=False,
@@ -71,7 +71,7 @@ Examples:
 
     Example 2:
         >>> from datasets import load_dataset
-        >>> perplexity = evaluate.load("perplexity", module_type="measurement")
+        >>> perplexity = supercontrast_evaluate.load("perplexity", module_type="measurement")
         >>> data = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")["text"][:10] # doctest: +SKIP
         >>> data = [s for s in data if s!='']
         >>> results = perplexity.compute(model_id='gpt2',
@@ -85,7 +85,7 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class Perplexity(evaluate.Measurement):
     def _info(self):
         return evaluate.MeasurementInfo(

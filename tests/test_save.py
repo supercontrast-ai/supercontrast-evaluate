@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 from unittest import TestCase
 
-import evaluate
+import supercontrast_evaluate
 
 
 result_dict = {"metric": 1.0, "model_name": "x"}

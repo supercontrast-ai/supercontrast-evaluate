@@ -18,7 +18,7 @@ import numpy as np
 from nltk.translate import meteor_score
 from packaging import version
 
-import evaluate
+import supercontrast_evaluate
 
 
 if evaluate.config.PY_VERSION < version.parse("3.8"):
@@ -79,7 +79,7 @@ Returns:
     'meteor': meteor score.
 Examples:
 
-    >>> meteor = evaluate.load('meteor')
+    >>> meteor = supercontrast_evaluate.load('meteor')
     >>> predictions = ["It is a guide to action which ensures that the military always obeys the commands of the party"]
     >>> references = ["It is a guide to action that ensures that the military will forever heed Party commands"]
     >>> results = meteor.compute(predictions=predictions, references=references)
@@ -88,10 +88,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Meteor(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Meteor(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

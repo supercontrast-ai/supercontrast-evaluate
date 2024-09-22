@@ -35,7 +35,7 @@ Dataset analysis or exploration.
 The measurement takes a list of texts as input, as well as the name of the model used to compute the metric:
 
 ```python
-from evaluate import load
+from supercontrast_evaluate import load
 perplexity = load("perplexity",  module_type= "measurement")
 results = perplexity.compute(data=input_texts, model_id='gpt2')
 ```

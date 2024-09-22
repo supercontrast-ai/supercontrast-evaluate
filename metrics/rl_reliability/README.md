@@ -22,7 +22,7 @@ The RL Reliability Metrics library provides a set of metrics for measuring the r
 ## How to Use
 
 ```python
-import evaluate
+import supercontrast_evaluate
 import numpy as np
 
 rl_reliability = evaluate.load("rl_reliability", "online")

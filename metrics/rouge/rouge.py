@@ -21,7 +21,7 @@ import numpy  # Here to have a nice missing dependency error message early on
 import six  # Here to have a nice missing dependency error message early on
 from rouge_score import rouge_scorer, scoring
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -71,7 +71,7 @@ Returns:
     rougeLsum: rouge_lsum (f1)
 Examples:
 
-    >>> rouge = evaluate.load('rouge')
+    >>> rouge = supercontrast_evaluate.load('rouge')
     >>> predictions = ["hello there", "general kenobi"]
     >>> references = ["hello there", "general kenobi"]
     >>> results = rouge.compute(predictions=predictions, references=references)
@@ -90,10 +90,10 @@ class Tokenizer:
         return self.tokenizer_func(text)
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Rouge(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Rouge(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

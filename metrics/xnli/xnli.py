@@ -15,7 +15,7 @@
 
 import datasets
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -55,7 +55,7 @@ Examples:
 
     >>> predictions = [0, 1]
     >>> references = [0, 1]
-    >>> xnli_metric = evaluate.load("xnli")
+    >>> xnli_metric = supercontrast_evaluate.load("xnli")
     >>> results = xnli_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'accuracy': 1.0}
@@ -66,10 +66,10 @@ def simple_accuracy(preds, labels):
     return (preds == labels).mean()
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Xnli(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Xnli(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

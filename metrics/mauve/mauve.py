@@ -22,7 +22,7 @@ import sklearn  # Here to have a nice missing dependency error message early on
 import tqdm  # Here to have a nice missing dependency error message early on
 from mauve import compute_mauve  # From: mauve-text
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -81,8 +81,8 @@ Returns:
 Examples:
 
     >>> # faiss segfaults in doctest for some reason, so the .compute call is not tested with doctest
-    >>> import evaluate
-    >>> mauve = evaluate.load('mauve')
+    >>> import supercontrast_evaluate
+    >>> mauve = supercontrast_evaluate.load('mauve')
     >>> predictions = ["hello there", "general kenobi"]
     >>> references = ["hello there", "general kenobi"]
     >>> out = mauve.compute(predictions=predictions, references=references) # doctest: +SKIP
@@ -91,10 +91,10 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Mauve(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Mauve(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             homepage="https://github.com/krishnap25/mauve",

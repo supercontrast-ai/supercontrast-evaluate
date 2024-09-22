@@ -46,7 +46,7 @@ pipe = ScikitEvalPipeline(text_clf)
 We can now pass this `pipeline` to the `evaluator`:
 
 ```py
-from evaluate import evaluator
+from supercontrast_evaluate import evaluator
 
 task_evaluator = evaluator("text-classification")
 task_evaluator.compute(pipe, ds["test"], "accuracy")

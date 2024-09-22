@@ -24,7 +24,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 from .execute import check_correctness
 
@@ -76,7 +76,7 @@ Returns:
     pass_at_k: dict with pass rates for each k
     results: dict with granular results of each unittest
 Examples:
-    >>> code_eval = evaluate.load("code_eval")
+    >>> code_eval = supercontrast_evaluate.load("code_eval")
     >>> test_cases = ["assert add(2,3)==5"]
     >>> candidates = [["def add(a,b): return a*b", "def add(a, b): return a+b"]]
     >>> pass_at_k, results = code_eval.compute(references=test_cases, predictions=candidates, k=[1, 2])
@@ -131,10 +131,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE."""
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class CodeEval(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class CodeEval(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             # This is the description that will appear on the metrics page.
             description=_DESCRIPTION,
             citation=_CITATION,

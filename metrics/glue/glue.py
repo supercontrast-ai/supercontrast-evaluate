@@ -17,7 +17,7 @@ import datasets
 from scipy.stats import pearsonr, spearmanr
 from sklearn.metrics import f1_score, matthews_corrcoef
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -50,28 +50,28 @@ Returns: depending on the GLUE subset, one or several of:
     "matthews_correlation": Matthew Correlation
 Examples:
 
-    >>> glue_metric = evaluate.load('glue', 'sst2')  # 'sst2' or any of ["mnli", "mnli_mismatched", "mnli_matched", "qnli", "rte", "wnli", "hans"]
+    >>> glue_metric = supercontrast_evaluate.load('glue', 'sst2')  # 'sst2' or any of ["mnli", "mnli_mismatched", "mnli_matched", "qnli", "rte", "wnli", "hans"]
     >>> references = [0, 1]
     >>> predictions = [0, 1]
     >>> results = glue_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'accuracy': 1.0}
 
-    >>> glue_metric = evaluate.load('glue', 'mrpc')  # 'mrpc' or 'qqp'
+    >>> glue_metric = supercontrast_evaluate.load('glue', 'mrpc')  # 'mrpc' or 'qqp'
     >>> references = [0, 1]
     >>> predictions = [0, 1]
     >>> results = glue_metric.compute(predictions=predictions, references=references)
     >>> print(results)
     {'accuracy': 1.0, 'f1': 1.0}
 
-    >>> glue_metric = evaluate.load('glue', 'stsb')
+    >>> glue_metric = supercontrast_evaluate.load('glue', 'stsb')
     >>> references = [0., 1., 2., 3., 4., 5.]
     >>> predictions = [0., 1., 2., 3., 4., 5.]
     >>> results = glue_metric.compute(predictions=predictions, references=references)
     >>> print({"pearson": round(results["pearson"], 2), "spearmanr": round(results["spearmanr"], 2)})
     {'pearson': 1.0, 'spearmanr': 1.0}
 
-    >>> glue_metric = evaluate.load('glue', 'cola')
+    >>> glue_metric = supercontrast_evaluate.load('glue', 'cola')
     >>> references = [0, 1]
     >>> predictions = [0, 1]
     >>> results = glue_metric.compute(predictions=predictions, references=references)
@@ -102,8 +102,8 @@ def pearson_and_spearman(preds, labels):
     }
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Glue(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Glue(supercontrast_evaluate.Metric):
     def _info(self):
         if self.config_name not in [
             "sst2",
@@ -124,7 +124,7 @@ class Glue(evaluate.Metric):
                 '["sst2", "mnli", "mnli_mismatched", "mnli_matched", '
                 '"cola", "stsb", "mrpc", "qqp", "qnli", "rte", "wnli", "hans"]'
             )
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

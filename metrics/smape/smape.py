@@ -18,7 +18,7 @@ import numpy as np
 from sklearn.metrics._regression import _check_reg_targets
 from sklearn.utils.validation import check_consistent_length
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -59,7 +59,7 @@ Returns:
         sMAPE output is non-negative floating point in the range (0, 2). The best value is 0.0.
 Examples:
 
-    >>> smape_metric = evaluate.load("smape")
+    >>> smape_metric = supercontrast_evaluate.load("smape")
     >>> predictions = [2.5, 0.0, 2, 8]
     >>> references = [3, -0.5, 2, 7]
     >>> results = smape_metric.compute(predictions=predictions, references=references)
@@ -68,7 +68,7 @@ Examples:
 
     If you're using multi-dimensional lists, then set the config as follows :
 
-    >>> smape_metric = evaluate.load("smape", "multilist")
+    >>> smape_metric = supercontrast_evaluate.load("smape", "multilist")
     >>> predictions = [[0.5, 1], [-1, 1], [7, -6]]
     >>> references = [[0.1, 2], [-1, 2], [8, -5]]
     >>> results = smape_metric.compute(predictions=predictions, references=references)
@@ -123,10 +123,10 @@ def symmetric_mean_absolute_percentage_error(y_true, y_pred, *, sample_weight=No
     return np.average(output_errors, weights=multioutput)
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Smape(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Smape(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

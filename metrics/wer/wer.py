@@ -16,7 +16,7 @@
 import datasets
 from jiwer import compute_measures
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -67,17 +67,17 @@ Examples:
 
     >>> predictions = ["this is the prediction", "there is an other sample"]
     >>> references = ["this is the reference", "there is another one"]
-    >>> wer = evaluate.load("wer")
+    >>> wer = supercontrast_evaluate.load("wer")
     >>> wer_score = wer.compute(predictions=predictions, references=references)
     >>> print(wer_score)
     0.5
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class WER(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class WER(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

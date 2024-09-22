@@ -16,7 +16,7 @@
 import datasets
 from scipy.stats import wilcoxon
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -34,7 +34,7 @@ Returns:
     p (`float`): The p value. Minimum possible value is 0. Maximum possible value is 1.0. A lower p value means a more significant difference.
 
 Examples:
-    >>> wilcoxon = evaluate.load("wilcoxon")
+    >>> wilcoxon = supercontrast_evaluate.load("wilcoxon")
     >>> results = wilcoxon.compute(predictions1=[-7, 123.45, 43, 4.91, 5], predictions2=[1337.12, -9.74, 1, 2, 3.21])
     >>> print(results)
     {'stat': 5.0, 'p': 0.625}
@@ -53,7 +53,7 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
 class Wilcoxon(evaluate.Comparison):
     def _info(self):
         return evaluate.ComparisonInfo(

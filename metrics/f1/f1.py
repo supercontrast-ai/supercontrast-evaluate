@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import f1_score
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -46,19 +46,19 @@ Returns:
 Examples:
 
     Example 1-A simple binary example
-        >>> f1_metric = evaluate.load("f1")
+        >>> f1_metric = supercontrast_evaluate.load("f1")
         >>> results = f1_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0])
         >>> print(results)
         {'f1': 0.5}
 
     Example 2-The same simple binary example as in Example 1, but with `pos_label` set to `0`.
-        >>> f1_metric = evaluate.load("f1")
+        >>> f1_metric = supercontrast_evaluate.load("f1")
         >>> results = f1_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0], pos_label=0)
         >>> print(round(results['f1'], 2))
         0.67
 
     Example 3-The same simple binary example as in Example 1, but with `sample_weight` included.
-        >>> f1_metric = evaluate.load("f1")
+        >>> f1_metric = supercontrast_evaluate.load("f1")
         >>> results = f1_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0], sample_weight=[0.9, 0.5, 3.9, 1.2, 0.3])
         >>> print(round(results['f1'], 2))
         0.35
@@ -80,7 +80,7 @@ Examples:
         {'f1': array([0.8, 0. , 0. ])}
 
     Example 5-A multi-label example
-        >>> f1_metric = evaluate.load("f1", "multilabel")
+        >>> f1_metric = supercontrast_evaluate.load("f1", "multilabel")
         >>> results = f1_metric.compute(predictions=[[0, 1, 1], [1, 1, 0]], references=[[0, 1, 1], [0, 1, 0]], average="macro")
         >>> print(round(results['f1'], 2))
         0.67
@@ -102,10 +102,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class F1(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class F1(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

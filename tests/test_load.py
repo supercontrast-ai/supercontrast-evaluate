@@ -6,8 +6,8 @@ from unittest import TestCase
 import pytest
 from datasets import DownloadConfig
 
-import evaluate
-from evaluate.loading import (
+import supercontrast_evaluate
+from supercontrast_evaluate.loading import (
     CachedEvaluationModuleFactory,
     HubEvaluationModuleFactory,
     LocalEvaluationModuleFactory,
@@ -22,8 +22,8 @@ SAMPLE_METRIC_IDENTIFIER = "lvwerra/test"
 METRIC_LOADING_SCRIPT_NAME = "__dummy_metric1__"
 
 METRIC_LOADING_SCRIPT_CODE = """
-import evaluate
-from evaluate import EvaluationModuleInfo
+import supercontrast_evaluate
+from supercontrast_evaluate import EvaluationModuleInfo
 from datasets import Features, Value
 
 class __DummyMetric1__(evaluate.EvaluationModule):
@@ -56,7 +56,7 @@ class ModuleFactoryTest(TestCase):
         self.hf_modules_cache = tempfile.mkdtemp()
         self.cache_dir = tempfile.mkdtemp()
         self.download_config = DownloadConfig(cache_dir=self.cache_dir)
-        self.dynamic_modules_path = evaluate.loading.init_dynamic_modules(
+        self.dynamic_modules_path = supercontrast_evaluate.loading.init_dynamic_modules(
             name="test_datasets_modules_" + os.path.basename(self.hf_modules_cache),
             hf_modules_cache=self.hf_modules_cache,
         )
@@ -64,7 +64,7 @@ class ModuleFactoryTest(TestCase):
     def test_HubEvaluationModuleFactory_with_internal_import(self):
         # "squad_v2" requires additional imports (internal)
         factory = HubEvaluationModuleFactory(
-            "evaluate-metric/squad_v2",
+            "supercontrast_evaluate.Metric/squad_v2",
             module_type="metric",
             download_config=self.download_config,
             dynamic_modules_path=self.dynamic_modules_path,
@@ -75,7 +75,7 @@ class ModuleFactoryTest(TestCase):
     def test_HubEvaluationModuleFactory_with_external_import(self):
         # "bleu" requires additional imports (external from github)
         factory = HubEvaluationModuleFactory(
-            "evaluate-metric/bleu",
+            "supercontrast_evaluate.Metric/bleu",
             module_type="metric",
             download_config=self.download_config,
             dynamic_modules_path=self.dynamic_modules_path,

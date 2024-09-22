@@ -17,7 +17,7 @@ import datasets
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -47,17 +47,17 @@ Args:
 Returns:
     scores (list of int): list of scores.
 Examples:
-    >>> frugalscore = evaluate.load("frugalscore")
+    >>> frugalscore = supercontrast_evaluate.load("frugalscore")
     >>> results = frugalscore.compute(predictions=['hello there', 'huggingface'], references=['hello world', 'hugging face'])
     >>> print([round(s, 3) for s in results["scores"]])
     [0.631, 0.645]
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class FRUGALSCORE(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class FRUGALSCORE(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

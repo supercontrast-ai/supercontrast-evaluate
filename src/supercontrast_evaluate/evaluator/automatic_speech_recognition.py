@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 TASK_DOCUMENTATION = r"""
     Examples:
     ```python
-    >>> from evaluate import evaluator
+    >>> from supercontrast_evaluate import evaluator
     >>> from datasets import load_dataset
     >>> task_evaluator = evaluator("automatic-speech-recognition")
     >>> data = load_dataset("mozilla-foundation/common_voice_11_0", "en", split="validation[:40]")
@@ -80,6 +80,7 @@ class AutomaticSpeechRecognitionEvaluator(Evaluator):
         input_column: str = "path",
         label_column: str = "sentence",
         generation_kwargs: dict = None,
+        n_rows: int = -1,
     ) -> Tuple[Dict[str, float], Any]:
         """
         input_column (`str`, defaults to `"path"`):
@@ -107,6 +108,7 @@ class AutomaticSpeechRecognitionEvaluator(Evaluator):
             random_state=random_state,
             input_column=input_column,
             label_column=label_column,
+            n_rows=n_rows,
         )
 
         return result

@@ -27,7 +27,7 @@ except LookupError:
 from nltk.tokenize.nist import NISTTokenizer
 from nltk.translate.nist_score import corpus_nist, sentence_nist
 
-import evaluate
+import supercontrast_evaluate
 
 
 _CITATION = """\
@@ -70,7 +70,7 @@ Args:
 Returns:
     'nist_mt': nist_mt score
 Examples:
-    >>> nist_mt = evaluate.load("nist_mt")
+    >>> nist_mt = supercontrast_evaluate.load("nist_mt")
     >>> hypothesis = "It is a guide to action which ensures that the military always obeys the commands of the party"
     >>> reference1 = "It is a guide to action that ensures that the military will forever heed Party commands"
     >>> reference2 = "It is the guiding principle which guarantees the military forces always being under the command of the Party"
@@ -82,12 +82,12 @@ Examples:
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class NistMt(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class NistMt(supercontrast_evaluate.Metric):
     """A wrapper around NLTK's NIST implementation."""
 
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             module_type="metric",
             description=_DESCRIPTION,
             citation=_CITATION,

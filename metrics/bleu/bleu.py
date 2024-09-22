@@ -15,7 +15,7 @@
 
 import datasets
 
-import evaluate
+import supercontrast_evaluate
 
 from .nmt_bleu import compute_bleu  # From: https://github.com/tensorflow/nmt/blob/master/nmt/scripts/bleu.py
 from .tokenizer_13a import Tokenizer13a
@@ -77,17 +77,17 @@ Examples:
     ...     ["hello there general kenobi", "hello there!"],
     ...     ["foo bar foobar"]
     ... ]
-    >>> bleu = evaluate.load("bleu")
+    >>> bleu = supercontrast_evaluate.load("bleu")
     >>> results = bleu.compute(predictions=predictions, references=references)
     >>> print(results["bleu"])
     1.0
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Bleu(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Bleu(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

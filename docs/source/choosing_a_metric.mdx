@@ -52,7 +52,7 @@ GLUE is actually a collection of different subsets on different tasks, so first 
 If you are evaluating your model on a benchmark dataset like the ones mentioned above, you can use its dedicated evaluation metric. Make sure you respect the format that they require. For example, to evaluate your model on the [SQuAD](https://huggingface.co/datasets/squad) dataset, you need to feed the `question` and `context` into your model and return the `prediction_text`, which should be compared with the `references` (based on matching the `id` of the question) :
 
 ```
->>> from evaluate import load
+>>> from supercontrast_evaluate import load
 >>> squad_metric = load("squad")
 >>> predictions = [{'prediction_text': '1976', 'id': '56e10a3be3433e1400422b22'}]
 >>> references = [{'answers': {'answer_start': [97], 'text': ['1976']}, 'id': '56e10a3be3433e1400422b22'}]

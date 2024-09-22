@@ -34,7 +34,7 @@ CharacTER was developed for machine translation evaluation.
 ## How to Use
 
 ```python
-import evaluate
+import supercontrast_evaluate
 character = evaluate.load("character")
 
 # Single hyp/ref 

@@ -433,8 +433,8 @@ class EvaluationModule(EvaluationModuleInfoMixin):
             - `None` if the evaluation module is not run on the main process (`process_id != 0`).
 
         ```py
-        >>> import evaluate
-        >>> accuracy =  evaluate.load("accuracy")
+        >>> import supercontrast_evaluate
+        >>> accuracy =  supercontrast_evaluate.load("accuracy")
         >>> accuracy.compute(predictions=[0, 1, 1, 0], references=[0, 1, 0, 1])
         ```
         """
@@ -497,8 +497,8 @@ class EvaluationModule(EvaluationModuleInfoMixin):
         Example:
 
         ```py
-        >>> import evaluate
-        >>> accuracy = evaluate.load("accuracy")
+        >>> import supercontrast_evaluate
+        >>> accuracy = supercontrast_evaluate.load("accuracy")
         >>> for refs, preds in zip([[0,1],[0,1]], [[1,0],[0,1]]):
         ...     accuracy.add_batch(references=refs, predictions=preds)
         ```
@@ -557,8 +557,8 @@ class EvaluationModule(EvaluationModuleInfoMixin):
         Example:
 
         ```py
-        >>> import evaluate
-        >>> accuracy = evaluate.load("accuracy")
+        >>> import supercontrast_evaluate
+        >>> accuracy = supercontrast_evaluate.load("accuracy")
         >>> accuracy.add(references=[0,1], predictions=[1,0])
         ```
         """
@@ -690,7 +690,7 @@ class EvaluationModule(EvaluationModuleInfoMixin):
         Example:
 
         ```py
-        >>> import evaluate
+        >>> import supercontrast_evaluate
         ```
         """
         if dl_manager is None:
@@ -798,7 +798,7 @@ class Metric(EvaluationModule):
             Specify the id of the current process in a distributed setup (between 0 and num_process-1)
             This is useful to compute metrics in distributed setups (in particular non-additive metrics like F1).
         seed (`int`, *optional*):
-            If specified, this will temporarily set numpy's random seed when [`~evaluate.Metric.compute`] is run.
+            If specified, this will temporarily set numpy's random seed when [`~supercontrast_evaluate.Metric.compute`] is run.
         experiment_id (`str`):
             A specific experiment id. This is used if several distributed evaluations share the same file system.
             This is useful to compute metrics in distributed setups (in particular non-additive metrics like F1).
@@ -904,9 +904,9 @@ class CombinedEvaluations:
         Example:
 
         ```py
-        >>> import evaluate
-        >>> accuracy = evaluate.load("accuracy")
-        >>> f1 = evaluate.load("f1")
+        >>> import supercontrast_evaluate
+        >>> accuracy = supercontrast_evaluate.load("accuracy")
+        >>> f1 = supercontrast_evaluate.load("f1")
         >>> clf_metrics = combine(["accuracy", "f1"])
         >>> for ref, pred in zip([0,1,0,1], [1,0,0,1]):
         ...     clf_metrics.add(references=ref, predictions=pred)
@@ -928,9 +928,9 @@ class CombinedEvaluations:
 
         Example:
         ```py
-        >>> import evaluate
-        >>> accuracy = evaluate.load("accuracy")
-        >>> f1 = evaluate.load("f1")
+        >>> import supercontrast_evaluate
+        >>> accuracy = supercontrast_evaluate.load("accuracy")
+        >>> f1 = supercontrast_evaluate.load("f1")
         >>> clf_metrics = combine(["accuracy", "f1"])
         >>> for refs, preds in zip([[0,1],[0,1]], [[1,0],[0,1]]):
         ...     clf_metrics.add(references=refs, predictions=preds)
@@ -964,9 +964,9 @@ class CombinedEvaluations:
         Example:
 
         ```py
-        >>> import evaluate
-        >>> accuracy = evaluate.load("accuracy")
-        >>> f1 = evaluate.load("f1")
+        >>> import supercontrast_evaluate
+        >>> accuracy = supercontrast_evaluate.load("accuracy")
+        >>> f1 = supercontrast_evaluate.load("f1")
         >>> clf_metrics = combine(["accuracy", "f1"])
         >>> clf_metrics.compute(predictions=[0,1], references=[1,1])
         {'accuracy': 0.5, 'f1': 0.6666666666666666}
@@ -1024,9 +1024,9 @@ def combine(evaluations, force_prefix=False):
     Examples:
 
     ```py
-    >>> import evaluate
-    >>> accuracy = evaluate.load("accuracy")
-    >>> f1 = evaluate.load("f1")
+    >>> import supercontrast_evaluate
+    >>> accuracy = supercontrast_evaluate.load("accuracy")
+    >>> f1 = supercontrast_evaluate.load("f1")
     >>> clf_metrics = combine(["accuracy", "f1"])
     ```
     """

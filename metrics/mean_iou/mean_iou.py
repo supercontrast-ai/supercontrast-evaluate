@@ -18,7 +18,7 @@ from typing import Dict, Optional
 import datasets
 import numpy as np
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -62,7 +62,7 @@ Examples:
 
     >>> import numpy as np
 
-    >>> mean_iou = evaluate.load("mean_iou")
+    >>> mean_iou = supercontrast_evaluate.load("mean_iou")
 
     >>> # suppose one has 3 different segmentation maps predicted
     >>> predicted_1 = np.array([[1, 2], [3, 4], [5, 255]])
@@ -273,10 +273,10 @@ def mean_iou(
     return metrics
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class MeanIoU(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class MeanIoU(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

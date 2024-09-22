@@ -49,7 +49,7 @@ def list_evaluation_modules(module_type=None, include_community=True, with_detai
     Example:
 
     ```py
-    >>> from evaluate import list_evaluation_modules
+    >>> from supercontrast_evaluate import list_evaluation_modules
     >>> list_evaluation_modules(module_type="metric")
     ```
     """
@@ -125,5 +125,5 @@ def inspect_evaluation_module(
     print(
         f"The processing scripts for metric {path} can be inspected at {local_path}. "
         f"The main class is in {evaluation_module.module_path}. "
-        f"You can modify this processing scripts and use it with `evaluate.load({local_path})`."
+        f"You can modify this processing scripts and use it with `supercontrast_evaluate.load({local_path})`."
     )

@@ -16,7 +16,7 @@
 import datasets
 from sklearn.metrics import precision_score
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -52,19 +52,19 @@ Returns:
 Examples:
 
     Example 1-A simple binary example
-        >>> precision_metric = evaluate.load("precision")
+        >>> precision_metric = supercontrast_evaluate.load("precision")
         >>> results = precision_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0])
         >>> print(results)
         {'precision': 0.5}
 
     Example 2-The same simple binary example as in Example 1, but with `pos_label` set to `0`.
-        >>> precision_metric = evaluate.load("precision")
+        >>> precision_metric = supercontrast_evaluate.load("precision")
         >>> results = precision_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0], pos_label=0)
         >>> print(round(results['precision'], 2))
         0.67
 
     Example 3-The same simple binary example as in Example 1, but with `sample_weight` included.
-        >>> precision_metric = evaluate.load("precision")
+        >>> precision_metric = supercontrast_evaluate.load("precision")
         >>> results = precision_metric.compute(references=[0, 1, 0, 1, 0], predictions=[0, 0, 1, 1, 0], sample_weight=[0.9, 0.5, 3.9, 1.2, 0.3])
         >>> print(results)
         {'precision': 0.23529411764705882}
@@ -102,10 +102,10 @@ _CITATION = """
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Precision(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Precision(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,

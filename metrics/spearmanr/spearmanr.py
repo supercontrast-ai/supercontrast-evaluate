@@ -16,7 +16,7 @@
 import datasets
 from scipy.stats import spearmanr
 
-import evaluate
+import supercontrast_evaluate
 
 
 _DESCRIPTION = """
@@ -47,13 +47,13 @@ Returns:
     p-value (`float`): p-value. **Note**: is only returned if `return_pvalue=True` is input.
 Examples:
     Example 1:
-        >>> spearmanr_metric = evaluate.load("spearmanr")
+        >>> spearmanr_metric = supercontrast_evaluate.load("spearmanr")
         >>> results = spearmanr_metric.compute(references=[1, 2, 3, 4, 5], predictions=[10, 9, 2.5, 6, 4])
         >>> print(results)
         {'spearmanr': -0.7}
 
     Example 2:
-        >>> spearmanr_metric = evaluate.load("spearmanr")
+        >>> spearmanr_metric = supercontrast_evaluate.load("spearmanr")
         >>> results = spearmanr_metric.compute(references=[1, 2, 3, 4, 5],
         ...                                     predictions=[10, 9, 2.5, 6, 4],
         ...                                     return_pvalue=True)
@@ -96,10 +96,10 @@ _CITATION = r"""\
 """
 
 
-@evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
-class Spearmanr(evaluate.Metric):
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+class Spearmanr(supercontrast_evaluate.Metric):
     def _info(self):
-        return evaluate.MetricInfo(
+        return supercontrast_evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
             inputs_description=_KWARGS_DESCRIPTION,
