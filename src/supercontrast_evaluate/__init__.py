@@ -27,7 +27,6 @@ SCRIPTS_VERSION = "main" if version.parse(__version__).is_devrelease else __vers
 
 del version
 
-from .evaluation_suite import EvaluationSuite
 from .evaluator import (
     AudioClassificationEvaluator,
     AutomaticSpeechRecognitionEvaluator,
@@ -44,7 +43,7 @@ from .evaluator import (
 )
 from .hub import push_to_hub
 from .info import ComparisonInfo, EvaluationModuleInfo, MeasurementInfo, MetricInfo
-from .inspect import inspect_evaluation_module, list_evaluation_modules
+# from .inspect import inspect_evaluation_module, list_evaluation_modules
 from .loading import load
 from .module import CombinedEvaluations, Comparison, EvaluationModule, Measurement, Metric, combine
 from .saving import save
