@@ -17,7 +17,7 @@
 # pylint: enable=line-too-long
 # pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position
 
-__version__ = "0.4.4.dev0"
+__version__ = "0.4.5"
 __note__ = "This is the SuperContrast fork of HuggingFace Evaluate."
 
 from packaging import version
