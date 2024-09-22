@@ -75,9 +75,14 @@ class TextClassificationEvaluator(Evaluator):
 
         data = load_dataset(data) if isinstance(data, str) else data
 
-        return {"references": data[label_column]}, DatasetColumnPair(
-            data, input_column, second_input_column, "text", "text_pair", n_rows=n_rows
-        )
+        if n_rows == -1:
+            return {"references": data[label_column]}, DatasetColumnPair(
+                data, input_column, second_input_column, "text", "text_pair", n_rows=n_rows
+            )
+        else:
+            return {"references": data[label_column][:n_rows]}, DatasetColumnPair(
+                data, input_column, second_input_column, "text", "text_pair", n_rows=n_rows
+            )
 
     def predictions_processor(self, predictions, label_mapping):
         predictions = [

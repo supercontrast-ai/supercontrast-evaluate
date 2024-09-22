@@ -255,6 +255,7 @@ class Evaluator(ABC):
 
         # Compute predictions
         predictions, perf_results = self.call_pipeline(pipe, pipe_inputs)
+        print("pipeline predictions", predictions)
         processed_predictions = self.predictions_processor(predictions, label_mapping)
 
         metric_inputs.update(processed_predictions)
@@ -422,7 +423,10 @@ class Evaluator(ABC):
 
         self.check_required_columns(data, {"input_column": input_column, "label_column": label_column})
 
-        return {"references": data[label_column]}, DatasetColumn(data, input_column, n_rows)
+        if n_rows == -1:
+            return {"references": data[label_column]}, DatasetColumn(data, input_column, n_rows)
+        else:
+            return {"references": data[label_column][:n_rows]}, DatasetColumn(data, input_column, n_rows)
 
     def prepare_pipeline(
         self,
@@ -529,6 +533,7 @@ class Evaluator(ABC):
         random_state: Optional[int] = None,
     ):
         """Compute and return metrics."""
+        print("metric_inputs", metric_inputs)
         result = metric.compute(**metric_inputs, **self.METRIC_KWARGS)
 
         if strategy == "bootstrap":

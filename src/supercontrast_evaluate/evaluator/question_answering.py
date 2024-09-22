@@ -111,15 +111,27 @@ class QuestionAnsweringEvaluator(Evaluator):
             },
         )
 
-        metric_inputs = dict()
-        metric_inputs["references"] = [
-            {"id": element[id_column], "answers": element[label_column]} for element in data
-        ]
+        if n_rows == -1:
+            metric_inputs = dict()
+            metric_inputs["references"] = [
+                {"id": element[id_column], "answers": element[label_column]} for element in data
+            ]
 
-        return metric_inputs, {
-            "question": DatasetColumn(data, question_column, n_rows=n_rows),
-            "context": DatasetColumn(data, context_column, n_rows=n_rows),
-        }
+            return metric_inputs, {
+                "question": DatasetColumn(data, question_column, n_rows=n_rows),
+                "context": DatasetColumn(data, context_column, n_rows=n_rows),
+            }
+        
+        else:
+            metric_inputs = dict()
+            metric_inputs["references"] = [
+                {"id": element[id_column], "answers": element[label_column]} for element in data[:n_rows]
+            ]
+
+            return metric_inputs, {
+                "question": DatasetColumn(data, question_column, n_rows=n_rows),
+                "context": DatasetColumn(data, context_column, n_rows=n_rows),
+            }
 
     def is_squad_v2_format(self, data: Dataset, label_column: str = "answers"):
         """

@@ -126,7 +126,7 @@ EXTRAS_REQUIRE = {
 
 setup(
     name="supercontrast-evaluate",
-    version="0.4.7",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
+    version="0.4.8",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
     description="SuperContrast fork of HuggingFace community-driven open-source library of evaluation",
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
