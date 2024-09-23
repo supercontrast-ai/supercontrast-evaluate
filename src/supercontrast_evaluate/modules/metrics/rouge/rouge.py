@@ -90,7 +90,9 @@ class Tokenizer:
         return self.tokenizer_func(text)
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Rouge(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -101,7 +103,9 @@ class Rouge(supercontrast_evaluate.Metric):
                 datasets.Features(
                     {
                         "predictions": datasets.Value("string", id="sequence"),
-                        "references": datasets.Sequence(datasets.Value("string", id="sequence")),
+                        "references": datasets.Sequence(
+                            datasets.Value("string", id="sequence")
+                        ),
                     }
                 ),
                 datasets.Features(
@@ -111,7 +115,9 @@ class Rouge(supercontrast_evaluate.Metric):
                     }
                 ),
             ],
-            codebase_urls=["https://github.com/google-research/google-research/tree/master/rouge"],
+            codebase_urls=[
+                "https://github.com/google-research/google-research/tree/master/rouge"
+            ],
             reference_urls=[
                 "https://en.wikipedia.org/wiki/ROUGE_(metric)",
                 "https://github.com/google-research/google-research/tree/master/rouge",
@@ -119,7 +125,13 @@ class Rouge(supercontrast_evaluate.Metric):
         )
 
     def _compute(
-        self, predictions, references, rouge_types=None, use_aggregator=True, use_stemmer=False, tokenizer=None
+        self,
+        predictions,
+        references,
+        rouge_types=None,
+        use_aggregator=True,
+        use_stemmer=False,
+        tokenizer=None,
     ):
         if rouge_types is None:
             rouge_types = ["rouge1", "rouge2", "rougeL", "rougeLsum"]
@@ -129,7 +141,9 @@ class Rouge(supercontrast_evaluate.Metric):
         if tokenizer is not None:
             tokenizer = Tokenizer(tokenizer)
 
-        scorer = rouge_scorer.RougeScorer(rouge_types=rouge_types, use_stemmer=use_stemmer, tokenizer=tokenizer)
+        scorer = rouge_scorer.RougeScorer(
+            rouge_types=rouge_types, use_stemmer=use_stemmer, tokenizer=tokenizer
+        )
         if use_aggregator:
             aggregator = scoring.BootstrapAggregator()
         else:

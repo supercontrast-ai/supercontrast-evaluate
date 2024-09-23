@@ -53,7 +53,9 @@ _CITATION = """
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Wilcoxon(evaluate.Comparison):
     def _info(self):
         return evaluate.ComparisonInfo(

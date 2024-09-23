@@ -81,7 +81,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Mape(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -106,8 +108,9 @@ class Mape(supercontrast_evaluate.Metric):
                 "references": datasets.Value("float"),
             }
 
-    def _compute(self, predictions, references, sample_weight=None, multioutput="uniform_average"):
-
+    def _compute(
+        self, predictions, references, sample_weight=None, multioutput="uniform_average"
+    ):
         mape_score = mean_absolute_percentage_error(
             references,
             predictions,

@@ -142,7 +142,9 @@ year={2011}
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class ROCAUC(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -165,7 +167,9 @@ class ROCAUC(supercontrast_evaluate.Metric):
                     "prediction_scores": datasets.Value("float"),
                 }
             ),
-            reference_urls=["https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html"],
+            reference_urls=[
+                "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html"
+            ],
         )
 
     def _compute(

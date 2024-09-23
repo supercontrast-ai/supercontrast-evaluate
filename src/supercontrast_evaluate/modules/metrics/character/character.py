@@ -89,7 +89,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Character(supercontrast_evaluate.Metric):
     """CharacTer is a character-level metric inspired by the commonly applied translation edit rate (TER)."""
 
@@ -101,17 +103,25 @@ class Character(supercontrast_evaluate.Metric):
             inputs_description=_KWARGS_DESCRIPTION,
             features=[
                 datasets.Features(
-                    {"predictions": Value("string", id="prediction"), "references": Value("string", id="reference")}
+                    {
+                        "predictions": Value("string", id="prediction"),
+                        "references": Value("string", id="reference"),
+                    }
                 ),
                 datasets.Features(
                     {
                         "predictions": Value("string", id="prediction"),
-                        "references": Sequence(Value("string", id="reference"), id="references"),
+                        "references": Sequence(
+                            Value("string", id="reference"), id="references"
+                        ),
                     }
                 ),
             ],
             homepage="https://github.com/bramvanroy/CharacTER",
-            codebase_urls=["https://github.com/bramvanroy/CharacTER", "https://github.com/rwth-i6/CharacTER"],
+            codebase_urls=[
+                "https://github.com/bramvanroy/CharacTER",
+                "https://github.com/rwth-i6/CharacTER",
+            ],
         )
 
     def _compute(

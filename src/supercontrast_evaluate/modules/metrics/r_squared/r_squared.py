@@ -64,7 +64,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class r_squared(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(

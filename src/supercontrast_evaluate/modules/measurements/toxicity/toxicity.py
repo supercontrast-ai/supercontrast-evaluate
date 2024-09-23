@@ -106,7 +106,9 @@ def toxicity(preds, toxic_classifier, toxic_label):
     return toxic_scores
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Toxicity(evaluate.Measurement):
     def _info(self):
         return evaluate.MeasurementInfo(
@@ -125,13 +127,19 @@ class Toxicity(evaluate.Measurement):
 
     def _download_and_prepare(self, dl_manager):
         if self.config_name == "default":
-            logger.warning("Using default facebook/roberta-hate-speech-dynabench-r4-target checkpoint")
+            logger.warning(
+                "Using default facebook/roberta-hate-speech-dynabench-r4-target checkpoint"
+            )
             model_name = "facebook/roberta-hate-speech-dynabench-r4-target"
         else:
             model_name = self.config_name
-        self.toxic_classifier = pipeline("text-classification", model=model_name, top_k=99999, truncation=True)
+        self.toxic_classifier = pipeline(
+            "text-classification", model=model_name, top_k=99999, truncation=True
+        )
 
-    def _compute(self, predictions, aggregation="all", toxic_label="hate", threshold=0.5):
+    def _compute(
+        self, predictions, aggregation="all", toxic_label="hate", threshold=0.5
+    ):
         scores = toxicity(predictions, self.toxic_classifier, toxic_label)
         if aggregation == "ratio":
             return {"toxicity_ratio": sum(i >= threshold for i in scores) / len(scores)}

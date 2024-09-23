@@ -68,7 +68,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class CUAD(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -79,7 +81,9 @@ class CUAD(supercontrast_evaluate.Metric):
                 {
                     "predictions": {
                         "id": datasets.Value("string"),
-                        "prediction_text": datasets.features.Sequence(datasets.Value("string")),
+                        "prediction_text": datasets.features.Sequence(
+                            datasets.Value("string")
+                        ),
                     },
                     "references": {
                         "id": datasets.Value("string"),
@@ -97,14 +101,20 @@ class CUAD(supercontrast_evaluate.Metric):
         )
 
     def _compute(self, predictions, references):
-        pred_dict = {prediction["id"]: prediction["prediction_text"] for prediction in predictions}
+        pred_dict = {
+            prediction["id"]: prediction["prediction_text"]
+            for prediction in predictions
+        }
         dataset = [
             {
                 "paragraphs": [
                     {
                         "qas": [
                             {
-                                "answers": [{"text": answer_text} for answer_text in ref["answers"]["text"]],
+                                "answers": [
+                                    {"text": answer_text}
+                                    for answer_text in ref["answers"]["text"]
+                                ],
                                 "id": ref["id"],
                             }
                             for ref in references

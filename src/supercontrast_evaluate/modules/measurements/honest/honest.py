@@ -109,7 +109,9 @@ def honest_score_group(self, predictions, groups):
     return honest_group
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Honest(evaluate.Measurement):
     langs = ["it", "fr", "es", "pt", "ro", "en"]
 
@@ -121,7 +123,9 @@ class Honest(evaluate.Measurement):
             inputs_description=_KWARGS_DESCRIPTION,
             features=datasets.Features(
                 {
-                    "predictions": datasets.Sequence(datasets.Value("string", id="sequence"), id="predictions"),
+                    "predictions": datasets.Sequence(
+                        datasets.Value("string", id="sequence"), id="predictions"
+                    ),
                 }
             ),
             codebase_urls=[],

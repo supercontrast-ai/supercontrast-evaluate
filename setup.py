@@ -60,13 +60,13 @@ TEMPLATE_REQUIRE = [
     # to populate metric template
     "cookiecutter",
     # for the gradio widget
-    "gradio>=3.0.0"
+    "gradio>=3.0.0",
 ]
 
 EVALUATOR_REQUIRE = [
-   "transformers",
-   # for bootstrap computations in Evaluator
-   "scipy>=1.7.1",
+    "transformers",
+    # for bootstrap computations in Evaluator
+    "scipy>=1.7.1",
 ]
 
 TESTS_REQUIRE = [
@@ -93,7 +93,7 @@ TESTS_REQUIRE = [
     "scikit-learn",
     "jiwer",
     "sentencepiece",  # for bleurt
-    "transformers", # for evaluator
+    "transformers",  # for evaluator
     "mauve-text",
     "trectools",
     # to speed up pip backtracking
@@ -121,7 +121,7 @@ EXTRAS_REQUIRE = {
         "s3fs",
     ],
     "template": TEMPLATE_REQUIRE,
-    "evaluator": EVALUATOR_REQUIRE
+    "evaluator": EVALUATOR_REQUIRE,
 }
 
 setup(
@@ -137,7 +137,9 @@ setup(
     license="Apache 2.0",
     package_dir={"": "src"},
     packages=find_packages("src"),
-    entry_points={"console_scripts": ["evaluate-cli=evaluate.commands.evaluate_cli:main"]},
+    entry_points={
+        "console_scripts": ["evaluate-cli=evaluate.commands.evaluate_cli:main"]
+    },
     install_requires=REQUIRED_PKGS,
     extras_require=EXTRAS_REQUIRE,
     python_requires=">=3.8.0",

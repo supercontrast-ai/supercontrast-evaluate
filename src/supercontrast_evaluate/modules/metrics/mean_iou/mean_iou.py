@@ -148,8 +148,12 @@ def intersect_and_union(
 
     intersect = pred_label[pred_label == label]
 
-    area_intersect = np.histogram(intersect, bins=num_labels, range=(0, num_labels - 1))[0]
-    area_pred_label = np.histogram(pred_label, bins=num_labels, range=(0, num_labels - 1))[0]
+    area_intersect = np.histogram(
+        intersect, bins=num_labels, range=(0, num_labels - 1)
+    )[0]
+    area_pred_label = np.histogram(
+        pred_label, bins=num_labels, range=(0, num_labels - 1)
+    )[0]
     area_label = np.histogram(label, bins=num_labels, range=(0, num_labels - 1))[0]
 
     area_union = area_pred_label + area_label - area_intersect
@@ -204,7 +208,12 @@ def total_intersect_and_union(
         total_area_union += area_union
         total_area_pred_label += area_pred_label
         total_area_label += area_label
-    return total_area_intersect, total_area_union, total_area_pred_label, total_area_label
+    return (
+        total_area_intersect,
+        total_area_union,
+        total_area_pred_label,
+        total_area_label,
+    )
 
 
 def mean_iou(
@@ -248,7 +257,12 @@ def mean_iou(
         - *per_category_iou* (`ndarray` of shape `(num_labels,)`):
             Per category IoU.
     """
-    total_area_intersect, total_area_union, total_area_pred_label, total_area_label = total_intersect_and_union(
+    (
+        total_area_intersect,
+        total_area_union,
+        total_area_pred_label,
+        total_area_label,
+    ) = total_intersect_and_union(
         results, gt_seg_maps, num_labels, ignore_index, label_map, reduce_labels
     )
 
@@ -267,13 +281,18 @@ def mean_iou(
 
     if nan_to_num is not None:
         metrics = dict(
-            {metric: np.nan_to_num(metric_value, nan=nan_to_num) for metric, metric_value in metrics.items()}
+            {
+                metric: np.nan_to_num(metric_value, nan=nan_to_num)
+                for metric, metric_value in metrics.items()
+            }
         )
 
     return metrics
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class MeanIoU(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(

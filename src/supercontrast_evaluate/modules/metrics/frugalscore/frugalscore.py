@@ -15,7 +15,12 @@
 
 import datasets
 import torch
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 
 import supercontrast_evaluate
 
@@ -54,7 +59,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class FRUGALSCORE(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -107,7 +114,11 @@ class FRUGALSCORE(supercontrast_evaluate.Metric):
 
         def tokenize_function(data):
             return self.tokenizer(
-                data["sentence1"], data["sentence2"], max_length=max_length, truncation=True, padding=True
+                data["sentence1"],
+                data["sentence2"],
+                max_length=max_length,
+                truncation=True,
+                padding=True,
             )
 
         tokenized_datasets = raw_datasets.map(tokenize_function, batched=True)

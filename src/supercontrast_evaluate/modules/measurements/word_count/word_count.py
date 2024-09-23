@@ -41,7 +41,9 @@ Examples:
 _CITATION = ""
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class WordCount(evaluate.Measurement):
     """This measurement returns the total number of words and the number of unique words
     in the input string(s)."""

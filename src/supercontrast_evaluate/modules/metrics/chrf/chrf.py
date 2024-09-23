@@ -123,7 +123,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class ChrF(supercontrast_evaluate.Metric):
     def _info(self):
         if version.parse(scb.__version__) < version.parse("1.4.12"):
@@ -140,7 +142,9 @@ class ChrF(supercontrast_evaluate.Metric):
                 datasets.Features(
                     {
                         "predictions": datasets.Value("string", id="sequence"),
-                        "references": datasets.Sequence(datasets.Value("string", id="sequence"), id="references"),
+                        "references": datasets.Sequence(
+                            datasets.Value("string", id="sequence"), id="references"
+                        ),
                     }
                 ),
                 datasets.Features(
@@ -175,9 +179,13 @@ class ChrF(supercontrast_evaluate.Metric):
             raise ValueError(
                 "ChrF, as implemented by sacrebleu, requires the same number of references for each prediction"
             )
-        transformed_references = [[refs[i] for refs in references] for i in range(references_per_prediction)]
+        transformed_references = [
+            [refs[i] for refs in references] for i in range(references_per_prediction)
+        ]
 
-        sb_chrf = CHRF(char_order, word_order, beta, lowercase, whitespace, eps_smoothing)
+        sb_chrf = CHRF(
+            char_order, word_order, beta, lowercase, whitespace, eps_smoothing
+        )
         output = sb_chrf.corpus_score(predictions, transformed_references)
 
         return {

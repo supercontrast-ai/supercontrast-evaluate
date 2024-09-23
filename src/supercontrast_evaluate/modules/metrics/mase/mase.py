@@ -91,7 +91,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Mase(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -123,9 +125,10 @@ class Mase(supercontrast_evaluate.Metric):
         sample_weight=None,
         multioutput="uniform_average",
     ):
-
         y_pred_naive = training[:-periodicity]
-        mae_naive = mean_absolute_error(training[periodicity:], y_pred_naive, multioutput=multioutput)
+        mae_naive = mean_absolute_error(
+            training[periodicity:], y_pred_naive, multioutput=multioutput
+        )
 
         mae_score = mean_absolute_error(
             references,

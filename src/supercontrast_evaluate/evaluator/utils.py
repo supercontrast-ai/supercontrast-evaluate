@@ -10,7 +10,11 @@ class DatasetColumn(list):
         self.n_rows = n_rows
 
     def __len__(self):
-        return min(len(self.dataset), self.n_rows) if self.n_rows != -1 else len(self.dataset)
+        return (
+            min(len(self.dataset), self.n_rows)
+            if self.n_rows != -1
+            else len(self.dataset)
+        )
 
     def __getitem__(self, i):
         if self.n_rows != -1 and i >= self.n_rows:
@@ -42,7 +46,9 @@ def choose_split(data, subset=None):
     for split in preferred_split_order:
         if split in available_splits:
             return split
-    raise ValueError("No dataset split defined! Pass an explicit value to the `split` kwarg.")
+    raise ValueError(
+        "No dataset split defined! Pass an explicit value to the `split` kwarg."
+    )
 
 
 class DatasetColumnPair(list):
@@ -76,7 +82,11 @@ class DatasetColumnPair(list):
         self.n_rows = n_rows
 
     def __len__(self):
-        return min(len(self.dataset), self.n_rows) if self.n_rows != -1 else len(self.dataset)
+        return (
+            min(len(self.dataset), self.n_rows)
+            if self.n_rows != -1
+            else len(self.dataset)
+        )
 
     def __getitem__(self, i):
         if self.n_rows != -1 and i >= self.n_rows:
@@ -84,14 +94,18 @@ class DatasetColumnPair(list):
 
         return {
             self.first_key: self.dataset[i][self.first_col],
-            self.second_key: self.dataset[i][self.second_col] if self.second_col else None,
+            self.second_key: self.dataset[i][self.second_col]
+            if self.second_col
+            else None,
         }
 
     def __iter__(self):
         return (
             {
                 self.first_key: self.dataset[i][self.first_col],
-                self.second_key: self.dataset[i][self.second_col] if self.second_col else None,
+                self.second_key: self.dataset[i][self.second_col]
+                if self.second_col
+                else None,
             }
             for i in range(len(self))
         )

@@ -83,7 +83,9 @@ _CITATION = """
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class ExactMatch(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -108,7 +110,6 @@ class ExactMatch(supercontrast_evaluate.Metric):
         ignore_punctuation=False,
         ignore_numbers=False,
     ):
-
         if regexes_to_ignore is not None:
             for s in regexes_to_ignore:
                 predictions = np.array([re.sub(s, "", x) for x in predictions])

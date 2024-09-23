@@ -7,13 +7,14 @@ from tests.test_evaluator import DummyTextClassificationPipeline
 class TestEvaluationSuite(TestCase):
     def setUp(self):
         # Check that the EvaluationSuite loads successfully
-        self.evaluation_suite = EvaluationSuite.load("supercontrast_evaluate/evaluation-suite-ci")
+        self.evaluation_suite = EvaluationSuite.load(
+            "supercontrast_evaluate/evaluation-suite-ci"
+        )
 
         # Setup a dummy model for usage with the EvaluationSuite
         self.dummy_model = DummyTextClassificationPipeline()
 
     def test_running_evaluation_suite(self):
-
         # Check that the evaluation suite successfully runs
         results = self.evaluation_suite.run(self.dummy_model)
 

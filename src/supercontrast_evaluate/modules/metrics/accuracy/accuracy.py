@@ -77,7 +77,9 @@ _CITATION = """
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Accuracy(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -95,12 +97,19 @@ class Accuracy(supercontrast_evaluate.Metric):
                     "references": datasets.Value("int32"),
                 }
             ),
-            reference_urls=["https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html"],
+            reference_urls=[
+                "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html"
+            ],
         )
 
     def _compute(self, predictions, references, normalize=True, sample_weight=None):
         return {
             "accuracy": float(
-                accuracy_score(references, predictions, normalize=normalize, sample_weight=sample_weight)
+                accuracy_score(
+                    references,
+                    predictions,
+                    normalize=normalize,
+                    sample_weight=sample_weight,
+                )
             )
         }

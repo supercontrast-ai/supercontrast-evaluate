@@ -65,7 +65,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Squad(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -74,7 +76,10 @@ class Squad(supercontrast_evaluate.Metric):
             inputs_description=_KWARGS_DESCRIPTION,
             features=datasets.Features(
                 {
-                    "predictions": {"id": datasets.Value("string"), "prediction_text": datasets.Value("string")},
+                    "predictions": {
+                        "id": datasets.Value("string"),
+                        "prediction_text": datasets.Value("string"),
+                    },
                     "references": {
                         "id": datasets.Value("string"),
                         "answers": datasets.features.Sequence(
@@ -91,14 +96,20 @@ class Squad(supercontrast_evaluate.Metric):
         )
 
     def _compute(self, predictions, references):
-        pred_dict = {prediction["id"]: prediction["prediction_text"] for prediction in predictions}
+        pred_dict = {
+            prediction["id"]: prediction["prediction_text"]
+            for prediction in predictions
+        }
         dataset = [
             {
                 "paragraphs": [
                     {
                         "qas": [
                             {
-                                "answers": [{"text": answer_text} for answer_text in ref["answers"]["text"]],
+                                "answers": [
+                                    {"text": answer_text}
+                                    for answer_text in ref["answers"]["text"]
+                                ],
                                 "id": ref["id"],
                             }
                             for ref in references

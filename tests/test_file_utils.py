@@ -4,7 +4,14 @@ from unittest.mock import patch
 
 import pytest
 
-from supercontrast_evaluate.utils.file_utils import OfflineModeIsEnabled, cached_path, ftp_get, ftp_head, http_get, http_head
+from supercontrast_evaluate.utils.file_utils import (
+    OfflineModeIsEnabled,
+    cached_path,
+    ftp_get,
+    ftp_head,
+    http_get,
+    http_head,
+)
 
 
 FILE_CONTENT = """\

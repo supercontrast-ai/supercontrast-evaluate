@@ -88,7 +88,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Meteor(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -99,7 +101,9 @@ class Meteor(supercontrast_evaluate.Metric):
                 datasets.Features(
                     {
                         "predictions": datasets.Value("string", id="sequence"),
-                        "references": datasets.Sequence(datasets.Value("string", id="sequence"), id="references"),
+                        "references": datasets.Sequence(
+                            datasets.Value("string", id="sequence"), id="references"
+                        ),
                     }
                 ),
                 datasets.Features(
@@ -109,7 +113,9 @@ class Meteor(supercontrast_evaluate.Metric):
                     }
                 ),
             ],
-            codebase_urls=["https://github.com/nltk/nltk/blob/develop/nltk/translate/meteor_score.py"],
+            codebase_urls=[
+                "https://github.com/nltk/nltk/blob/develop/nltk/translate/meteor_score.py"
+            ],
             reference_urls=[
                 "https://www.nltk.org/api/nltk.translate.html#module-nltk.translate.meteor_score",
                 "https://en.wikipedia.org/wiki/METEOR",
@@ -145,7 +151,11 @@ class Meteor(supercontrast_evaluate.Metric):
             else:
                 scores = [
                     meteor_score.single_meteor_score(
-                        word_tokenize(ref), word_tokenize(pred), alpha=alpha, beta=beta, gamma=gamma
+                        word_tokenize(ref),
+                        word_tokenize(pred),
+                        alpha=alpha,
+                        beta=beta,
+                        gamma=gamma,
                     )
                     for ref, pred in zip(references, predictions)
                 ]
@@ -153,7 +163,9 @@ class Meteor(supercontrast_evaluate.Metric):
             if multiple_refs:
                 scores = [
                     meteor_score.meteor_score(
-                        [[word_tokenize(ref) for ref in group] for group in references][0],
+                        [[word_tokenize(ref) for ref in group] for group in references][
+                            0
+                        ],
                         word_tokenize(pred),
                         alpha=alpha,
                         beta=beta,
@@ -163,7 +175,9 @@ class Meteor(supercontrast_evaluate.Metric):
                 ]
             else:
                 scores = [
-                    meteor_score.single_meteor_score(ref, pred, alpha=alpha, beta=beta, gamma=gamma)
+                    meteor_score.single_meteor_score(
+                        ref, pred, alpha=alpha, beta=beta, gamma=gamma
+                    )
                     for ref, pred in zip(references, predictions)
                 ]
 

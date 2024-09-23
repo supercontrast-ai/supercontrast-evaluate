@@ -57,7 +57,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Mahalanobis(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -66,13 +68,14 @@ class Mahalanobis(supercontrast_evaluate.Metric):
             inputs_description=_KWARGS_DESCRIPTION,
             features=datasets.Features(
                 {
-                    "X": datasets.Sequence(datasets.Value("float", id="sequence"), id="X"),
+                    "X": datasets.Sequence(
+                        datasets.Value("float", id="sequence"), id="X"
+                    ),
                 }
             ),
         )
 
     def _compute(self, X, reference_distribution):
-
         # convert to numpy arrays
         X = np.array(X)
         reference_distribution = np.array(reference_distribution)

@@ -61,7 +61,9 @@ year={2020}
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class WordLength(evaluate.Measurement):
     """This measurement returns the average number of words in the input string(s)."""
 

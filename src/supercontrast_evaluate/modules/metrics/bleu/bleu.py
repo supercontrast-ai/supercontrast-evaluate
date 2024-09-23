@@ -17,7 +17,9 @@ import datasets
 
 import supercontrast_evaluate
 
-from .nmt_bleu import compute_bleu  # From: https://github.com/tensorflow/nmt/blob/master/nmt/scripts/bleu.py
+from .nmt_bleu import (
+    compute_bleu,
+)  # From: https://github.com/tensorflow/nmt/blob/master/nmt/scripts/bleu.py
 from .tokenizer_13a import Tokenizer13a
 
 
@@ -84,7 +86,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Bleu(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -95,7 +99,9 @@ class Bleu(supercontrast_evaluate.Metric):
                 datasets.Features(
                     {
                         "predictions": datasets.Value("string", id="sequence"),
-                        "references": datasets.Sequence(datasets.Value("string", id="sequence"), id="references"),
+                        "references": datasets.Sequence(
+                            datasets.Value("string", id="sequence"), id="references"
+                        ),
                     }
                 ),
                 datasets.Features(
@@ -105,14 +111,23 @@ class Bleu(supercontrast_evaluate.Metric):
                     }
                 ),
             ],
-            codebase_urls=["https://github.com/tensorflow/nmt/blob/master/nmt/scripts/bleu.py"],
+            codebase_urls=[
+                "https://github.com/tensorflow/nmt/blob/master/nmt/scripts/bleu.py"
+            ],
             reference_urls=[
                 "https://en.wikipedia.org/wiki/BLEU",
                 "https://towardsdatascience.com/evaluating-text-output-in-nlp-bleu-at-your-own-risk-e8609665a213",
             ],
         )
 
-    def _compute(self, predictions, references, tokenizer=Tokenizer13a(), max_order=4, smooth=False):
+    def _compute(
+        self,
+        predictions,
+        references,
+        tokenizer=Tokenizer13a(),
+        max_order=4,
+        smooth=False,
+    ):
         # if only one reference is provided make sure we still use list of lists
         if isinstance(references[0], str):
             references = [[ref] for ref in references]
@@ -120,7 +135,10 @@ class Bleu(supercontrast_evaluate.Metric):
         references = [[tokenizer(r) for r in ref] for ref in references]
         predictions = [tokenizer(p) for p in predictions]
         score = compute_bleu(
-            reference_corpus=references, translation_corpus=predictions, max_order=max_order, smooth=smooth
+            reference_corpus=references,
+            translation_corpus=predictions,
+            max_order=max_order,
+            smooth=smooth,
         )
         (bleu, precisions, bp, ratio, translation_length, reference_length) = score
         return {

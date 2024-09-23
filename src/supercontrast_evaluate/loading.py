@@ -4,11 +4,12 @@ from typing import Optional, Union
 
 from .module import EvaluationModule
 
+
 def load(
     path: str,
     config_name: Optional[str] = None,
     module_type: Optional[str] = None,
-    **kwargs
+    **kwargs,
 ) -> EvaluationModule:
     if os.path.isfile(path):
         # If path is a file, load it directly
@@ -28,13 +29,17 @@ def load(
                 except ImportError:
                     continue
             if module_type is None:
-                raise ValueError(f"Could not find module '{path}' in any module type directory.")
+                raise ValueError(
+                    f"Could not find module '{path}' in any module type directory."
+                )
         else:
             module_path = f"supercontrast_evaluate.modules.{module_type}.{path}"
             try:
                 module = importlib.import_module(module_path)
             except ImportError:
-                raise ImportError(f"Could not import module '{path}' from {module_path}")
+                raise ImportError(
+                    f"Could not import module '{path}' from {module_path}"
+                )
 
     # Get the main class from the module
     main_class = getattr(module, path.capitalize(), None)

@@ -59,7 +59,9 @@ _CITATION = """
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class ConfusionMatrix(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -77,12 +79,20 @@ class ConfusionMatrix(supercontrast_evaluate.Metric):
                     "references": datasets.Value("int32"),
                 }
             ),
-            reference_urls=["https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"],
+            reference_urls=[
+                "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+            ],
         )
 
-    def _compute(self, predictions, references, labels=None, sample_weight=None, normalize=None):
+    def _compute(
+        self, predictions, references, labels=None, sample_weight=None, normalize=None
+    ):
         return {
             "confusion_matrix": confusion_matrix(
-                references, predictions, labels=labels, sample_weight=sample_weight, normalize=normalize
+                references,
+                predictions,
+                labels=labels,
+                sample_weight=sample_weight,
+                normalize=normalize,
             )
         }

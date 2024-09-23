@@ -102,7 +102,9 @@ def precision_at_10(en_sentvecs, in_sentvecs):
     return float(matches.mean())
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class IndicGlue(supercontrast_evaluate.Metric):
     def _info(self):
         if self.config_name not in [

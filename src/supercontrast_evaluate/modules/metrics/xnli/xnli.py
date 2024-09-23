@@ -66,7 +66,9 @@ def simple_accuracy(preds, labels):
     return (preds == labels).mean()
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Xnli(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -75,8 +77,12 @@ class Xnli(supercontrast_evaluate.Metric):
             inputs_description=_KWARGS_DESCRIPTION,
             features=datasets.Features(
                 {
-                    "predictions": datasets.Value("int64" if self.config_name != "sts-b" else "float32"),
-                    "references": datasets.Value("int64" if self.config_name != "sts-b" else "float32"),
+                    "predictions": datasets.Value(
+                        "int64" if self.config_name != "sts-b" else "float32"
+                    ),
+                    "references": datasets.Value(
+                        "int64" if self.config_name != "sts-b" else "float32"
+                    ),
                 }
             ),
             codebase_urls=[],

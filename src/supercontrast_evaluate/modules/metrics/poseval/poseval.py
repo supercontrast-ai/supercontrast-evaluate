@@ -80,7 +80,9 @@ Examples:
 """
 
 
-@supercontrast_evaluate.utils.file_utils.add_start_docstrings(_DESCRIPTION, _KWARGS_DESCRIPTION)
+@supercontrast_evaluate.utils.file_utils.add_start_docstrings(
+    _DESCRIPTION, _KWARGS_DESCRIPTION
+)
 class Poseval(supercontrast_evaluate.Metric):
     def _info(self):
         return supercontrast_evaluate.MetricInfo(
@@ -90,8 +92,12 @@ class Poseval(supercontrast_evaluate.Metric):
             inputs_description=_KWARGS_DESCRIPTION,
             features=datasets.Features(
                 {
-                    "predictions": datasets.Sequence(datasets.Value("string", id="label"), id="sequence"),
-                    "references": datasets.Sequence(datasets.Value("string", id="label"), id="sequence"),
+                    "predictions": datasets.Sequence(
+                        datasets.Value("string", id="label"), id="sequence"
+                    ),
+                    "references": datasets.Sequence(
+                        datasets.Value("string", id="label"), id="sequence"
+                    ),
                 }
             ),
             codebase_urls=["https://github.com/scikit-learn/scikit-learn"],
