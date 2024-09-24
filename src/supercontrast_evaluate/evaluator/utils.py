@@ -4,10 +4,11 @@ from datasets import Dataset, get_dataset_split_names
 class DatasetColumn(list):
     """Helper class to avoid loading a dataset column into memory when accessing it."""
 
-    def __init__(self, dataset: Dataset, key: str, n_rows: int = -1):
+    def __init__(self, dataset: Dataset, key: str, label_column: str, n_rows: int = -1):
         self.dataset = dataset
         self.key = key
         self.n_rows = n_rows
+        self.label_column = label_column
 
     def __len__(self):
         return (
@@ -20,13 +21,19 @@ class DatasetColumn(list):
         if self.n_rows != -1 and i >= self.n_rows:
             raise IndexError("Index out of range")
 
-        return self.dataset[i][self.key]
+        return {
+            self.key: self.dataset[i][self.key],
+            "label": self.dataset[i][self.label_column],
+        }
 
     def __iter__(self):
         for i in range(len(self)):
             if self.n_rows != -1 and i >= self.n_rows:
                 break
-            yield self.dataset[i][self.key]
+            yield {
+                self.key: self.dataset[i][self.key],
+                "label": self.dataset[i][self.label_column],
+            }
 
 
 def choose_split(data, subset=None):
@@ -61,6 +68,8 @@ class DatasetColumnPair(list):
         second_col: str,
         first_key: str,
         second_key: str,
+        label_column: str,
+        label_key: str,
         n_rows: int = -1,
     ):
         """
@@ -80,6 +89,8 @@ class DatasetColumnPair(list):
         self.first_key = first_key
         self.second_key = second_key
         self.n_rows = n_rows
+        self.label_column = label_column
+        self.label_key = label_key
 
     def __len__(self):
         return (
@@ -97,6 +108,7 @@ class DatasetColumnPair(list):
             self.second_key: self.dataset[i][self.second_col]
             if self.second_col
             else None,
+            self.label_key: self.dataset[i][self.label_column],
         }
 
     def __iter__(self):
@@ -106,6 +118,7 @@ class DatasetColumnPair(list):
                 self.second_key: self.dataset[i][self.second_col]
                 if self.second_col
                 else None,
+                self.label_key: self.dataset[i][self.label_column],
             }
             for i in range(len(self))
         )

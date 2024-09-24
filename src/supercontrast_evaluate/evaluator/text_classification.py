@@ -103,6 +103,8 @@ class TextClassificationEvaluator(Evaluator):
                 second_input_column,
                 "text",
                 "text_pair",
+                label_column,
+                "true_label",
                 n_rows=n_rows,
             )
         else:
@@ -112,6 +114,8 @@ class TextClassificationEvaluator(Evaluator):
                 second_input_column,
                 "text",
                 "text_pair",
+                label_column,
+                "true_label",
                 n_rows=n_rows,
             )
 

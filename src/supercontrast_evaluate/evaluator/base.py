@@ -253,7 +253,7 @@ class Evaluator(ABC):
         label_column: str = "label",
         label_mapping: Optional[Dict[str, Number]] = None,
         n_rows: int = -1,
-    ) -> Dict[str, float]:
+    ) -> Dict[str, Any]:
         result = {}
 
         self.check_for_mismatch_in_device_setup(device, model_or_pipeline)
@@ -465,13 +465,15 @@ class Evaluator(ABC):
             data, {"input_column": input_column, "label_column": label_column}
         )
 
+        print("using base class to prepare data")
+
         if n_rows == -1:
             return {"references": data[label_column]}, DatasetColumn(
-                data, input_column, n_rows
+                data, input_column, label_column, n_rows
             )
         else:
             return {"references": data[label_column][:n_rows]}, DatasetColumn(
-                data, input_column, n_rows
+                data, input_column, label_column, n_rows
             )
 
     def prepare_pipeline(
@@ -575,6 +577,7 @@ class Evaluator(ABC):
         return metric
 
     def call_pipeline(self, pipe, *args, **kwargs):
+        print("Invoking pipeline", pipe, "with args", args, "and kwargs", kwargs)
         start_time = perf_counter()
         pipe_output = pipe(*args, **kwargs, **self.PIPELINE_KWARGS)
         end_time = perf_counter()
